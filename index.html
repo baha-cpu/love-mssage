@@ -276,13 +276,13 @@
     }
   }
 
-  /* أنيميشن تكبير الخاتم */
+  /* أنيميشن تكبير وتصغير الخاتم بشكل مستمر */
   @keyframes ringGrow {
     0% {
       transform: scale(1);
     }
     50% {
-      transform: scale(2);
+      transform: scale(2.5);
     }
     100% {
       transform: scale(1);
@@ -291,7 +291,7 @@
 
   .grow-ring {
     display: inline-block;
-    animation: ringGrow 1.5s ease forwards;
+    animation: ringGrow 2s ease-in-out infinite;
   }
 </style>
 
@@ -314,10 +314,10 @@
 
     const ring = response.querySelector(".ring-emoji");
 
-    // لإعادة تشغيل الأنيميشن بإزالة وإضافة الكلاس
-    ring.classList.remove("grow-ring");
-    void ring.offsetWidth; // force reflow
-    ring.classList.add("grow-ring");
+    // أضف الكلاس لتشغيل الأنيميشن المستمر
+    if (!ring.classList.contains("grow-ring")) {
+      ring.classList.add("grow-ring");
+    }
   }
 
   function closeLoveGame() {
@@ -330,6 +330,10 @@
 
     const response = document.getElementById("loveResponse");
     response.style.display = "none";
+
+    // إزالة الأنيميشن لما تغلق اللعبة
+    const ring = response.querySelector(".ring-emoji");
+    ring.classList.remove("grow-ring");
   }
 </script>
   </body>
