@@ -126,5 +126,49 @@
 w nmut fik w much bch tnajm ay tofla fi denya<br> t3awdhk w mostahil tkun 5ir mn bnty w martii ye mozzaaa💋💍
       </div>
     </div>
+<!-- ♥ اللعبة السحرية ♥ -->
+<div id="loveGame" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.97); z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center; font-family:'Cairo', sans-serif; animation: fadeIn 1s ease;">
+  <h2 style="color:#cc0066; font-size:2.5em; margin-bottom:20px; animation: pop 1s ease;">jewb ♥</h2>
+  <p style="font-size:1.5em; margin-bottom:30px; color:#333; animation: fadeIn 2s ease;">taares beyaa?🤵🏻‍♂️👰🏾‍♀️</p>
+  <div style="animation: fadeIn 2.5s ease;">
+    <button onclick="loveAnswer(true)" style="margin: 0 15px; background-color:#ff3399; border:none; padding:12px 30px; border-radius:25px; font-size:1.1em; color:white; cursor:pointer;">btbi3aa ❤️</button>
+    <button onclick="loveAnswer(true)" style="margin: 0 15px; background-color:#cc0066; border:none; padding:12px 30px; border-radius:25px; font-size:1.1em; color:white; cursor:pointer;">akiid 💘</button>
+  </div>
+  <p id="loveResponse" style="margin-top:40px; font-size:1.4em; color:#cc0033; display:none; animation: fadeIn 3s ease;">cheddd💍</p>
+
+  <!-- موسيقى داخل اللعبة -->
+  <audio id="loveMusic" autoplay loop>
+    <source src="romantic.mp3" type="audio/mpeg" />
+  </audio>
+</div>
+
+<!-- زر تفعيل اللعبة -->
+<button onclick="startLoveGame()" style="position:fixed; bottom:20px; left:20px; background:#ff3399; color:white; border:none; padding:10px 20px; border-radius:30px; font-size:1em; cursor:pointer; box-shadow:0 0 10px #ff99cc;">magic game for u ♥</button>
+
+<!-- تأثيرات CSS -->
+<style>
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+  @keyframes pop {
+    0% {transform: scale(0.8); opacity: 0;}
+    100% {transform: scale(1); opacity: 1;}
+  }
+</style>
+
+<!-- سكريبت اللعبة -->
+<script>
+  function startLoveGame() {
+    document.getElementById('loveGame').style.display = 'flex';
+    document.getElementById('loveMusic').play();
+  }
+
+  function loveAnswer() {
+    const response = document.getElementById("loveResponse");
+    response.style.display = "block";
+  }
+</script>
   </body>
 </html>
