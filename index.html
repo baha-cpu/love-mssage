@@ -227,7 +227,7 @@
       animation: fadeIn 3s ease;
     "
   >
-    cheddd💍
+    cheddd <span class="ring-emoji">💍</span>
   </p>
 
   <audio id="loveMusic" loop>
@@ -275,6 +275,24 @@
       opacity: 1;
     }
   }
+
+  /* أنيميشن تكبير الخاتم */
+  @keyframes ringGrow {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .grow-ring {
+    display: inline-block;
+    animation: ringGrow 1.5s ease forwards;
+  }
 </style>
 
 <script>
@@ -291,19 +309,27 @@
   }
 
   function loveAnswer() {
-    document.getElementById("loveResponse").style.display = "block";
+    const response = document.getElementById("loveResponse");
+    response.style.display = "block";
+
+    const ring = response.querySelector(".ring-emoji");
+
+    // لإعادة تشغيل الأنيميشن بإزالة وإضافة الكلاس
+    ring.classList.remove("grow-ring");
+    void ring.offsetWidth; // force reflow
+    ring.classList.add("grow-ring");
   }
 
   function closeLoveGame() {
     const loveGame = document.getElementById("loveGame");
     loveGame.style.display = "none";
-    // Stop music if you want:
+
     const music = document.getElementById("loveMusic");
     music.pause();
     music.currentTime = 0;
 
-    // Hide response message for next time:
-    document.getElementById("loveResponse").style.display = "none";
+    const response = document.getElementById("loveResponse");
+    response.style.display = "none";
   }
 </script>
   </body>
