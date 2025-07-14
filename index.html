@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>أحبك ♥</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Cairo", sans-serif;
+        height: 100vh;
+        background: url("background.jpg") no-repeat center center fixed;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.85);
+        padding: 30px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 0 25px rgba(255, 0, 102, 0.4);
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        color: #cc0066;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 1.3em;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: #ff3366;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-size: 1em;
+        color: white;
+        cursor: pointer;
+        transition: 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #e6004c;
+      }
+
+      #secretMessage {
+        display: none;
+        font-size: 1.2em;
+        margin-top: 20px;
+        color: #cc0033;
+        font-weight: bold;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 24px;
+        color: red;
+        animation: float 5s infinite ease-in-out;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) scale(1.5);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- قلوب متحركة -->
+    <script>
+      for (let i = 0; i < 20; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = 3 + Math.random() * 4 + "s";
+        document.body.appendChild(heart);
+      }
+    </script>
+
+    <!-- موسيقى رومانسية -->
+    <button onclick="document.getElementById('myAudio').play()">شغل الموسيقى</button>
+
+<audio id="myAudio" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+    <!-- محتوى الرسالة -->
+    <div class="container">
+      <h1>إلى أميرتي الجميلة ♥</h1>
+      <p>
+        لا تكفي الكلمات لوصف مشاعري تجاهك...<br />
+        أنتِ النبض الذي يحييني، والابتسامة التي تذيب كل حزني...<br />
+        <strong>أحبك بكل تفاصيلك ♥</strong>
+      </p>
+      <button
+        onclick="document.getElementById('secretMessage').style.display='block'"
+      >
+        اضغطي هنا ♥
+      </button>
+      <div id="secretMessage">
+        في قلبي امرأة واحدة فقط... هي أنتِ إلى الأبد 💍
+      </div>
+    </div>
+  </body>
+</html>
