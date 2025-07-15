@@ -438,14 +438,26 @@ function answer(knows){
 
 function showResult(){
   const p = Math.round(score / questions.length * 100);
-  let msg = '';
-  if (p < 50) msg = 'bh 🖕🏿🖕🏿🖕🏿';
-  else if (p <= 75) msg = 'bh 👍👍👍';
-  else msg = 'nhbk 💋';
-  document.getElementById('resultText').innerText = `نتيجتك: ${p}% → ${msg}`;
+  let msg = '', color = '';
+
+  if (p < 50) {
+    msg = 'bh 🖕🏿🖕🏿🖕🏿';
+    color = '#ff4444'; // أحمر
+  } else if (p <= 75) {
+    msg = 'bh 👍👍👍';
+    color = '#ffc107'; // أصفر
+  } else {
+    msg = 'nhbk 💋';
+    color = '#28a745'; // أخضر
+  }
+
+  const resultText = document.getElementById('resultText');
+  resultText.innerText = `نتيجتك: ${p}% → ${msg}`;
+  resultText.style.color = color;
+  resultText.style.fontSize = '2.5em';
+  resultText.style.fontWeight = 'bold';
   document.getElementById('resultBox').style.display = 'block';
 }
-
 function closeQuiz(){
   document.getElementById('quizOverlay').style.display = 'none';
   document.getElementById('questionBox').style.display = 'none';
