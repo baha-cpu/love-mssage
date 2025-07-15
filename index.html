@@ -336,5 +336,116 @@
     ring.classList.remove("grow-ring");
   }
 </script>
+<!-- لعبة "تعرفني؟" التفاعلية -->
+<div id="quizOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:10000;justify-content:center;align-items:center;flex-direction:column;color:white;padding:20px;font-family:'Cairo',sans-serif;">
+  <button onclick="closeQuiz()" style="position:absolute;top:20px;right:20px;font-size:2em;color:white;border:none;background:transparent;cursor:pointer;">×</button>
+  <div id="heartContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;"></div>
+  <div id="questionBox" style="text-align:center;max-width:90%;display:none;">
+    <p id="questionText" style="font-size:1.4em;margin-bottom:20px;"></p>
+    <button onclick="answer(true)" style="padding:10px 20px;margin:0 10px;">أعرف</button>
+    <button onclick="answer(false)" style="padding:10px 20px;margin:0 10px;">لا أعرف</button>
+  </div>
+  <div id="resultBox" style="text-align:center;display:none;">
+    <p id="resultText" style="font-size:1.6em;margin-bottom:20px;"></p>
+    <button onclick="closeQuiz()" style="padding:10px 20px;">إغلاق</button>
+  </div>
+  <audio id="quizMusic" loop>
+    <source src="lovely.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<button onclick="startQuiz()" style="position:fixed;bottom:20px;left:20px;padding:10px 20px;background:#ff3399;color:white;border:none;border-radius:20px;cursor:pointer;z-index:9999;">ابدأ لعبة تعرفني؟ 💘</button>
+
+<style>
+@keyframes floatHeart {
+  0% {transform: translateY(100vh); opacity:0;}
+  20% {opacity:1;}
+  100% {transform: translateY(-10vh); opacity:0;}
+}
+.heart {
+  position:absolute;
+  font-size:1.8em;
+  animation:floatHeart 6s linear infinite;
+}
+</style>
+
+<script>
+const questions = [
+"شكون فريقي المفضل في الكرة؟ ⚽",
+"شكون مثلي الأعلى في الكرة؟ 🐐",
+"شنية السيارة إلي نحلم بيها؟ 🚗",
+"شنية الشعبة إلي نقرى فيها؟ 🧠",
+"شنوة آخر سنة قرّيت فيها؟ 📚",
+"شنية المادة إلي نحبها أكثر؟ 🔬",
+"شنوة نحب نولي في المستقبل؟ 👷‍♂️",
+"شنية نقطة ضعفي؟ 🫣",
+"تحبني كيما أنا، حتى بتعجرفي؟ 😏",
+"شنية الحاجة إلي ديما نكررها؟ 🔁",
+"نحب الحب ولا النجاح أكثر؟ ❤️🎓",
+"نحب نعيش وين؟ 🇪🇸",
+"شنوة طبعي وقت نغضب؟ 😤",
+"نحب الناس تعرفني كشنوة؟ 💭",
+"أكثر لاعب نحترمو في ريال مدريد؟ 🤍",
+"نحب الموسيقى؟ شنوة نوعي المفضل؟ 🎵",
+"شنوة أكثر حاجة نخاف منها؟ 😨",
+"نحب الحيوانات؟ شنوة نحب؟ 🐱",
+"شنية الحاجة إلي عمري ما نحكي عليها؟ 🤐",
+"شنية الكلمة إلي تحرقلي قلبي منك؟ 💔"
+];
+let used = [], current = 0, score = 0;
+function startQuiz(){
+  document.getElementById('quizOverlay').style.display='flex';
+  generateHearts();
+}
+function generateHearts(){
+  const c = document.getElementById('heartContainer');
+  c.innerHTML='';
+  for(let i=0;i<20;i++){
+    let h = document.createElement('div');
+    h.innerText='❤️';
+    h.className='heart';
+    h.style.left=Math.random()*90+'vw';
+    h.style.animationDelay=(Math.random()*6)+'s';
+    h.onclick = ()=> showQuestion(i);
+    c.appendChild(h);
+  }
+}
+function showQuestion(i){
+  if(used.includes(i)) return;
+  used.push(i);
+  current++;
+  const q = questions[i];
+  document.getElementById('questionText').innerText=q;
+  document.getElementById('questionBox').style.display='block';
+  document.getElementById('heartContainer').style.pointerEvents='none';
+  const music=document.getElementById('quizMusic');
+  if(music.paused) music.play().catch(()=>{});
+}
+function answer(knows){
+  document.getElementById('questionBox').style.display='none';
+  if(knows) score++;
+  if(current==20) showResult();
+  else document.getElementById('heartContainer').style.pointerEvents='auto';
+}
+function showResult(){
+  document.getElementById('heartContainer').style.display='none';
+  const p = Math.round(score/20*100);
+  let msg = '';
+  if(p<50) msg='bh 🖕🏿🖕🏿🖕🏿';
+  else if(p<=75) msg='bh 👍👍👍';
+  else msg='nhbk 💋';
+  document.getElementById('resultText').innerText=`نتيجتك: ${p}% → ${msg}`;
+  document.getElementById('resultBox').style.display='block';
+}
+function closeQuiz(){
+  document.getElementById('quizOverlay').style.display='none';
+  document.getElementById('heartContainer').style.display='block';
+  document.getElementById('resultBox').style.display='none';
+  used=[], current=0, score=0;
+  generateHearts();
+  document.getElementById('quizMusic').pause();
+  document.getElementById('quizMusic').currentTime=0;
+}
+</script>
   </body>
 </html>
