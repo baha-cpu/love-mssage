@@ -341,20 +341,21 @@
   <button onclick="closeQuiz()" style="position:absolute;top:20px;right:20px;font-size:2em;color:white;border:none;background:transparent;cursor:pointer;">×</button>
   <div id="heartContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;"></div>
   <div id="questionBox" style="text-align:center;max-width:90%;display:none;">
-    <p id="questionText" style="font-size:1.4em;margin-bottom:20px;"></p>
-    <button onclick="answer(true)" style="padding:10px 20px;margin:0 10px;">أعرف</button>
-    <button onclick="answer(false)" style="padding:10px 20px;margin:0 10px;">لا أعرف</button>
+    <p id="questionText" style="font-size:2em;margin-bottom:30px;color:#fff;"></p>
+    <button onclick="answer(true)" style="padding:15px 30px;margin:0 10px;font-size:1.2em;border-radius:15px;background:#28a745;color:white;border:none;">أعرف</button>
+    <button onclick="answer(false)" style="padding:15px 30px;margin:0 10px;font-size:1.2em;border-radius:15px;background:#dc3545;color:white;border:none;">لا أعرف</button>
   </div>
   <div id="resultBox" style="text-align:center;display:none;">
-    <p id="resultText" style="font-size:1.6em;margin-bottom:20px;"></p>
-    <button onclick="closeQuiz()" style="padding:10px 20px;">إغلاق</button>
+    <p id="resultText" style="font-size:2em;margin-bottom:20px;"></p>
+    <button onclick="closeQuiz()" style="padding:10px 20px;font-size:1.1em;border-radius:10px;">إغلاق</button>
   </div>
   <audio id="quizMusic" loop>
     <source src="lovely.mp3" type="audio/mpeg">
   </audio>
 </div>
 
-<button onclick="startQuiz()" style="position:fixed;bottom:20px;left:20px;padding:10px 20px;background:#ff3399;color:white;border:none;border-radius:20px;cursor:pointer;z-index:9999;">ابدأ لعبة تعرفني؟ 💘</button>
+<!-- زر تشغيل اللعبة - في أعلى يسار الشاشة -->
+<button onclick="startQuiz()" style="position:fixed;top:20px;left:20px;padding:12px 22px;background:#ff3399;color:white;border:none;border-radius:25px;cursor:pointer;z-index:9999;font-size:1em;">ابدأ لعبة تعرفني؟ 💘</button>
 
 <style>
 @keyframes floatHeart {
@@ -364,8 +365,9 @@
 }
 .heart {
   position:absolute;
-  font-size:1.8em;
+  font-size:3em;
   animation:floatHeart 6s linear infinite;
+  cursor: pointer;
 }
 </style>
 
@@ -402,7 +404,7 @@ function generateHearts(){
   c.innerHTML='';
   for(let i=0;i<20;i++){
     let h = document.createElement('div');
-    h.innerText='❤️';
+    h.innerText='💌';
     h.className='heart';
     h.style.left=Math.random()*90+'vw';
     h.style.animationDelay=(Math.random()*6)+'s';
