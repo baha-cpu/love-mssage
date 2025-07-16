@@ -23,28 +23,23 @@ musicBtn.onclick = () => {
 };
 
 // 🎁 عرض الرسالة السرية
-const secretBtn = document.getElementById('secretBtn');
-secretBtn.onclick = () => {
+document.getElementById('secretBtn').onclick = () => {
   document.getElementById('secretMessage').style.display = 'block';
 };
 
 // 💍 اللعبة السحرية (الخاتم)
 document.getElementById('startGameBtn').onclick = () => {
-  const loveGame = document.getElementById("loveGame");
-  loveGame.style.display = "flex";
+  document.getElementById("loveGame").style.display = "flex";
   mainAudio.pause();
 
   const loveMusic = document.getElementById("loveMusic");
   if (loveMusic.paused) {
-    loveMusic.play().catch(() => {
-      console.log("User gesture required for autoplay");
-    });
+    loveMusic.play().catch(() => {});
   }
 };
 
 document.getElementById('closeGameBtn').onclick = () => {
   document.getElementById("loveGame").style.display = "none";
-
   const loveMusic = document.getElementById("loveMusic");
   loveMusic.pause();
   loveMusic.currentTime = 0;
@@ -59,9 +54,7 @@ document.querySelectorAll('.loveAnswerBtn').forEach(btn => {
     const response = document.getElementById("loveResponse");
     response.style.display = "block";
     const ring = response.querySelector(".ring-emoji");
-    if (!ring.classList.contains("grow-ring")) {
-      ring.classList.add("grow-ring");
-    }
+    ring.classList.add("grow-ring");
   };
 });
 
@@ -89,7 +82,7 @@ const questions = [
   "Akthr sport nhbu 🏃🏻‍♂️"
 ];
 
-let used = [], current = 0, score = 0;
+let used = [], current = 0, score = 0, wasMusicPlaying = false;
 
 const quizOverlay = document.getElementById('quizOverlay');
 const questionText = document.getElementById('questionText');
@@ -103,6 +96,7 @@ const wrongSound = new Audio("wrong.mp3");
 
 // ابدأ اللعبة
 document.getElementById('startQuizBtn').onclick = () => {
+  wasMusicPlaying = !mainAudio.paused;
   quizOverlay.style.display = 'flex';
   generateHearts();
   if (!mainAudio.paused) mainAudio.pause();
@@ -151,7 +145,6 @@ document.querySelectorAll('.answerBtn').forEach(btn => {
 function showResult() {
   const p = Math.round((score / questions.length) * 100);
   let msg = '', color = '';
-
   if (p < 50) {
     msg = 'bh 🖕🏿🖕🏿🖕🏿';
     color = '#ff4444';
@@ -169,16 +162,15 @@ function showResult() {
   resultText.style.fontWeight = 'bold';
   resultBox.style.display = 'block';
 
+  resultBox.querySelectorAll("button").forEach(el => el.remove());
   const retryBtn = document.createElement("button");
   retryBtn.innerText = "🔁 أعد المحاولة";
   retryBtn.onclick = resetGame;
   retryBtn.style.marginTop = "20px";
   resultBox.appendChild(retryBtn);
 }
-let wasMusicPlaying = false; // متغير لتتبع حالة الموسيقى
 
 function resetGame() {
-  // رجع كل شيء كما كان
   used = [];
   current = 0;
   score = 0;
@@ -186,16 +178,9 @@ function resetGame() {
   questionBox.style.display = 'none';
   quizOverlay.style.display = 'none';
   resultText.innerText = '';
-
-  // حذف زر "أعد المحاولة" إن وجد
-  const retryBtn = resultBox.querySelector('button');
-  if (retryBtn) retryBtn.remove();
-
-  // إيقاف موسيقى اللعبة
   quizMusic.pause();
   quizMusic.currentTime = 0;
 
-  // ✅ فقط شغّل الموسيقى إذا كانت شغالة قبل
   if (wasMusicPlaying) {
     mainAudio.play().catch(() => {});
   }
