@@ -22,6 +22,7 @@ document.getElementById('secretBtn').onclick = () => {
 document.getElementById('startGameBtn').onclick = () => {
   const loveGame = document.getElementById("loveGame");
   loveGame.style.display = "flex";
+document.getElementById("myAudio").pause();
 
   const music = document.getElementById("loveMusic");
   if (music.paused) {
