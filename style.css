@@ -210,11 +210,12 @@ button:hover {
   margin-top: 40px;
 }
 
-#questionText, #resultText {
+#questionText {
   font-size: 2em;
   margin-bottom: 30px;
+  color: white;
+  transition: color 0.3s ease;
 }
-
 .answerBtn {
   padding: 15px 30px;
   margin: 0 10px;
