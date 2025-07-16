@@ -1,3 +1,4 @@
+/* الخط */
 @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");
 
 * {
@@ -11,7 +12,6 @@ body {
   height: 100vh;
   background: url("background.jpg") no-repeat center center fixed;
   background-size: cover;
-  position: relative;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ body {
   text-align: center;
   box-shadow: 0 0 25px rgba(255, 0, 102, 0.4);
   max-width: 90%;
-  margin-bottom: 20px;
+  margin-top: 30px;
 }
 
 h1 {
@@ -51,23 +51,13 @@ button {
   color: white;
   cursor: pointer;
   transition: 0.3s ease;
-  margin-top: 10px;
 }
 
 button:hover {
   background-color: #e6004c;
 }
 
-/* الرسالة السرية */
-#secretMessage {
-  display: none;
-  font-size: 1.2em;
-  margin-top: 20px;
-  color: #cc0033;
-  font-weight: bold;
-}
-
-/* القلوب المتحركة */
+/* ♥ القلب المتحرك */
 .heart {
   position: absolute;
   font-size: 24px;
@@ -76,19 +66,43 @@ button:hover {
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(100vh) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) scale(1.5);
-    opacity: 0;
-  }
+  0% { transform: translateY(100vh) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
 }
 
-/* لعبة الخاتم */
-#loveGame {
-  display: none;
+/* 💖 القلب الدرامي */
+.intro-heart {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6em;
+  color: red;
+  animation: popIn 2s ease forwards;
+  z-index: 10000;
+  opacity: 0;
+}
+
+@keyframes popIn {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  60% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* 💍 أنيميشن الخاتم */
+@keyframes ringGrow {
+  0% { transform: scale(1); }
+  50% { transform: scale(2.5); }
+  100% { transform: scale(1); }
+}
+
+.grow-ring {
+  display: inline-block;
+  animation: ringGrow 2s ease-in-out infinite;
+}
+
+/* ✨ اللعبة السحرية */
+.love-game {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -98,80 +112,10 @@ button:hover {
   justify-content: center;
   align-items: center;
   font-family: 'Cairo', sans-serif;
-  animation: fadeIn 1s ease;
-  text-align: center;
 }
 
-#loveGame h2 {
-  color: #cc0066;
-  font-size: 2.5em;
-  margin-bottom: 20px;
-  animation: pop 1s ease;
-}
-
-#loveGame p {
-  font-size: 1.5em;
-  margin-bottom: 30px;
-  color: #333;
-  animation: fadeIn 2s ease;
-}
-
-#loveGame #loveResponse {
-  margin-top: 40px;
-  font-size: 1.4em;
-  color: #cc0033;
-  display: none;
-  animation: fadeIn 3s ease;
-}
-
-.ring-emoji.grow-ring {
-  display: inline-block;
-  animation: ringGrow 2s ease-in-out infinite;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes ringGrow {
-  0% { transform: scale(1); }
-  50% { transform: scale(2.5); }
-  100% { transform: scale(1); }
-}
-
-/* زر تشغيل اللعبة */
-#startGameBtn, #startQuizBtn {
-  position: fixed;
-  padding: 10px 20px;
-  background: #ff3399;
-  color: white;
-  border: none;
-  border-radius: 30px;
-  font-size: 1em;
-  cursor: pointer;
-  box-shadow: 0 0 10px #ff99cc;
-  z-index: 9999;
-}
-
-#startGameBtn {
-  bottom: 20px;
-  left: 20px;
-}
-
-#startQuizBtn {
-  top: 20px;
-  left: 20px;
-}
-
-/* لعبة تعرفني؟ */
-#quizOverlay {
-  display: none;
+/* 🎮 لعبة تعرفني؟ */
+.quiz-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
@@ -182,15 +126,7 @@ button:hover {
   flex-direction: column;
   color: white;
   padding: 20px;
-  font-family: 'Cairo', sans-serif;
-}
-
-#heartGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-  gap: 20px;
-  max-width: 600px;
-  margin-top: 30px;
+  display: flex;
 }
 
 .heart-btn {
@@ -204,33 +140,34 @@ button:hover {
   transform: scale(1.2);
 }
 
-#questionBox, #resultBox {
-  text-align: center;
-  max-width: 90%;
-  margin-top: 40px;
-}
-
-#questionText {
-  font-size: 2em;
-  margin-bottom: 30px;
-  color: white;
-  transition: color 0.3s ease;
-}
-.answerBtn {
-  padding: 15px 30px;
-  margin: 0 10px;
+/* ♥ تايمر */
+#timer {
   font-size: 1.2em;
-  border-radius: 15px;
+  margin-top: 10px;
+  color: white;
+  font-weight: bold;
+}
+
+/* ♥ أزرار ثابتة */
+.floating-btn {
+  position: fixed;
+  background: #ff3399;
+  color: white;
   border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1em;
   cursor: pointer;
+  box-shadow: 0 0 10px #ff99cc;
+  z-index: 9999;
 }
 
-.answerBtn[data-answer="true"] {
-  background: #28a745;
-  color: white;
+.floating-btn.top {
+  top: 20px;
+  left: 20px;
 }
 
-.answerBtn[data-answer="false"] {
-  background: #dc3545;
-  color: white;
+.floating-btn.bottom {
+  bottom: 20px;
+  left: 20px;
 }
