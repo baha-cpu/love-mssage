@@ -175,20 +175,30 @@ function showResult() {
   retryBtn.style.marginTop = "20px";
   resultBox.appendChild(retryBtn);
 }
+let wasMusicPlaying = false; // متغير لتتبع حالة الموسيقى
 
 function resetGame() {
+  // رجع كل شيء كما كان
   used = [];
   current = 0;
   score = 0;
-
   resultBox.style.display = 'none';
   questionBox.style.display = 'none';
   quizOverlay.style.display = 'none';
   resultText.innerText = '';
 
+  // حذف زر "أعد المحاولة" إن وجد
+  const retryBtn = resultBox.querySelector('button');
+  if (retryBtn) retryBtn.remove();
+
+  // إيقاف موسيقى اللعبة
   quizMusic.pause();
   quizMusic.currentTime = 0;
-  mainAudio.play().catch(() => {});
+
+  // ✅ فقط شغّل الموسيقى إذا كانت شغالة قبل
+  if (wasMusicPlaying) {
+    mainAudio.play().catch(() => {});
+  }
 }
 
 // زر الإغلاق
