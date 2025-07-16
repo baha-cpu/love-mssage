@@ -1,55 +1,64 @@
-// 💖 القلب الدرامي في البداية
-window.addEventListener("load", () => {
-  const introHeart = document.getElementById("introHeart");
-  setTimeout(() => {
-    introHeart.style.display = "none";
-    // ثم قلوب متحركة
-    for (let i = 0; i < 20; i++) {
-      let heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 4 + "s";
-      document.body.appendChild(heart);
-    }
-  }, 3000);
-});
+// ❤️ توليد القلوب المتحركة
+for (let i = 0; i < 20; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 3 + Math.random() * 4 + "s";
+  document.body.appendChild(heart);
+}
 
-// 🎵 زر تشغيل الموسيقى
-document.getElementById("musicBtn").onclick = () => {
-  document.getElementById("myAudio").play();
+// 🎵 تشغيل الموسيقى الأساسية
+document.getElementById('musicBtn').onclick = () => {
+  document.getElementById('myAudio').play();
 };
 
-// 🔐 عرض الرسالة السرية
-document.getElementById("secretBtn").onclick = () => {
-  document.getElementById("secretMessage").style.display = "block";
+// 🎁 رسالة الحب السرية
+document.getElementById('secretBtn').onclick = () => {
+  document.getElementById('secretMessage').style.display = 'block';
 };
 
-// 💍 اللعبة السحرية
-document.getElementById("startGameBtn").onclick = () => {
-  document.getElementById("loveGame").style.display = "flex";
-  document.getElementById("loveMusic").play();
+// 💍 اللعبة السحرية (الخاتم)
+document.getElementById('startGameBtn').onclick = () => {
+  const loveGame = document.getElementById("loveGame");
+  loveGame.style.display = "flex";
+
+  const music = document.getElementById("loveMusic");
+  if (music.paused) {
+    music.play().catch(() => {
+      console.log("User gesture required for autoplay");
+    });
+  }
 };
 
-document.getElementById("closeGameBtn").onclick = () => {
-  document.getElementById("loveGame").style.display = "none";
+document.getElementById('closeGameBtn').onclick = () => {
+  const loveGame = document.getElementById("loveGame");
+  loveGame.style.display = "none";
+
   const music = document.getElementById("loveMusic");
   music.pause();
   music.currentTime = 0;
+
   const response = document.getElementById("loveResponse");
   response.style.display = "none";
-  response.querySelector(".ring-emoji").classList.remove("grow-ring");
+
+  const ring = response.querySelector(".ring-emoji");
+  ring.classList.remove("grow-ring");
 };
 
-document.querySelectorAll(".loveAnswerBtn").forEach(btn => {
+document.querySelectorAll('.loveAnswerBtn').forEach(btn => {
   btn.onclick = () => {
     const response = document.getElementById("loveResponse");
     response.style.display = "block";
-    response.querySelector(".ring-emoji").classList.add("grow-ring");
+
+    const ring = response.querySelector(".ring-emoji");
+    if (!ring.classList.contains("grow-ring")) {
+      ring.classList.add("grow-ring");
+    }
   };
 });
 
-// 🎮 لعبة "تعرفني؟"
+// 🎮 لعبة تعرفني؟
 const questions = [
   "Akther equipe nhebha?⚽",
   "Akthr équipe nhebha fi touns?⚽🇹🇳",
@@ -73,15 +82,15 @@ const questions = [
   "Akthr sport nhbu 🏃🏻‍♂️"
 ];
 
-let used = [], current = 0, score = 0, timer;
+let used = [], current = 0, score = 0;
 
-document.getElementById("startQuizBtn").onclick = () => {
+document.getElementById('startQuizBtn').onclick = () => {
   document.getElementById('quizOverlay').style.display = 'flex';
   generateHearts();
-};
 
-document.getElementById("closeQuizBtn").onclick = closeQuiz;
-document.getElementById("closeQuizBtn2").onclick = closeQuiz;
+  const mainMusic = document.getElementById('myAudio');
+  if (!mainMusic.paused) mainMusic.pause();
+};
 
 function generateHearts() {
   const grid = document.getElementById('heartGrid');
@@ -100,64 +109,59 @@ function showQuestion(i, btn) {
   used.push(i);
   current++;
   btn.innerText = '📧';
-  document.getElementById("questionText").innerText = questions[i];
-  document.getElementById("questionBox").style.display = "block";
-  startTimer();
-  const music = document.getElementById("quizMusic");
-  if (music.paused) music.play();
+  document.getElementById('questionText').innerText = questions[i];
+  document.getElementById('questionBox').style.display = 'block';
+
+  const music = document.getElementById('quizMusic');
+  if (music.paused) music.play().catch(() => {});
 }
 
-function startTimer() {
-  let time = 30;
-  const timerBox = document.getElementById("timer");
-  timerBox.innerText = `⏱️ ${time}s`;
-  clearInterval(timer);
-  timer = setInterval(() => {
-    time--;
-    timerBox.innerText = `⏱️ ${time}s`;
-    if (time === 0) {
-      clearInterval(timer);
-      answer(false);
-    }
-  }, 1000);
-}
-
-document.querySelectorAll(".answerBtn").forEach(btn => {
+document.querySelectorAll('.answerBtn').forEach(btn => {
   btn.onclick = () => {
-    const knows = btn.getAttribute("data-answer") === "true";
-    answer(knows);
+    const knows = btn.getAttribute('data-answer') === 'true';
+    document.getElementById('questionBox').style.display = 'none';
+    if (knows) score++;
+    if (current === questions.length) showResult();
   };
 });
 
-function answer(knows) {
-  clearInterval(timer);
-  document.getElementById("questionBox").style.display = 'none';
-  if (knows) score++;
-  if (current === questions.length) showResult();
-}
-
 function showResult() {
-  const p = Math.round(score / questions.length * 100);
+  const p = Math.round((score / questions.length) * 100);
   let msg = '', color = '';
+
   if (p < 50) {
-    msg = 'bh 🖕🏿🖕🏿🖕🏿'; color = '#ff4444';
+    msg = 'bh 🖕🏿🖕🏿🖕🏿';
+    color = '#ff4444';
   } else if (p <= 75) {
-    msg = 'bh 👍👍👍'; color = '#ffc107';
+    msg = 'bh 👍👍👍';
+    color = '#ffc107';
   } else {
-    msg = 'nhbk 💋'; color = '#28a745';
+    msg = 'nhbk 💋';
+    color = '#28a745';
   }
-  const resultText = document.getElementById("resultText");
+
+  const resultText = document.getElementById('resultText');
   resultText.innerText = `نتيجتك: ${p}% → ${msg}`;
   resultText.style.color = color;
-  document.getElementById("resultBox").style.display = 'block';
+  resultText.style.fontSize = '2.5em';
+  resultText.style.fontWeight = 'bold';
+  document.getElementById('resultBox').style.display = 'block';
 }
 
-function closeQuiz() {
-  document.getElementById("quizOverlay").style.display = 'none';
-  document.getElementById("questionBox").style.display = 'none';
-  document.getElementById("resultBox").style.display = 'none';
-  document.getElementById("quizMusic").pause();
-  document.getElementById("quizMusic").currentTime = 0;
-  used = []; current = 0; score = 0;
-  clearInterval(timer);
-}
+document.getElementById('closeQuizBtn').onclick =
+document.getElementById('closeQuizBtn2').onclick = () => {
+  document.getElementById('quizOverlay').style.display = 'none';
+  document.getElementById('questionBox').style.display = 'none';
+  document.getElementById('resultBox').style.display = 'none';
+
+  const quizMusic = document.getElementById('quizMusic');
+  quizMusic.pause();
+  quizMusic.currentTime = 0;
+
+  const mainMusic = document.getElementById('myAudio');
+  mainMusic.play().catch(() => {});
+
+  used = [];
+  current = 0;
+  score = 0;
+};
