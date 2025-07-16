@@ -1,168 +1,44 @@
-// ❤️ توليد القلوب المتحركة
-for (let i = 0; i < 20; i++) {
-  let heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = 3 + Math.random() * 4 + "s";
-  document.body.appendChild(heart);
-}
+// ❤️ توليد القلوب المتحركة for (let i = 0; i < 20; i++) { let heart = document.createElement("div"); heart.className = "heart"; heart.innerHTML = "❤️"; heart.style.left = Math.random() * 100 + "vw"; heart.style.animationDuration = 3 + Math.random() * 4 + "s"; document.body.appendChild(heart); }
 
-// 🎵 تشغيل الموسيقى الأساسية
-document.getElementById('musicBtn').onclick = () => {
-  document.getElementById('myAudio').play();
-};
+// 🎵 زر تشغيل/إيقاف الموسيقى const musicBtn = document.getElementById('musicBtn'); const mainAudio = document.getElementById('myAudio');
 
-// 🎁 رسالة الحب السرية
-document.getElementById('secretBtn').onclick = () => {
-  document.getElementById('secretMessage').style.display = 'block';
-};
+musicBtn.onclick = () => { if (mainAudio.paused) { mainAudio.play(); musicBtn.innerText = "🔊 إيقاف الموسيقى"; } else { mainAudio.pause(); musicBtn.innerText = "🎵 تشغيل الموسيقى"; } };
 
-// 💍 اللعبة السحرية (الخاتم)
-document.getElementById('startGameBtn').onclick = () => {
-  const loveGame = document.getElementById("loveGame");
-  loveGame.style.display = "flex";
-document.getElementById("myAudio").pause();
+// 🎁 عرض الرسالة السرية const secretBtn = document.getElementById('secretBtn'); secretBtn.onclick = () => { document.getElementById('secretMessage').style.display = 'block'; };
 
-  const music = document.getElementById("loveMusic");
-  if (music.paused) {
-    music.play().catch(() => {
-      console.log("User gesture required for autoplay");
-    });
-  }
-};
+// 💍 اللعبة السحرية (الخاتم) document.getElementById('startGameBtn').onclick = () => { const loveGame = document.getElementById("loveGame"); loveGame.style.display = "flex"; mainAudio.pause();
 
-document.getElementById('closeGameBtn').onclick = () => {
-  const loveGame = document.getElementById("loveGame");
-  loveGame.style.display = "none";
+const loveMusic = document.getElementById("loveMusic"); if (loveMusic.paused) { loveMusic.play().catch(() => { console.log("User gesture required for autoplay"); }); } };
 
-  const music = document.getElementById("loveMusic");
-  music.pause();
-  music.currentTime = 0;
+document.getElementById('closeGameBtn').onclick = () => { document.getElementById("loveGame").style.display = "none"; const loveMusic = document.getElementById("loveMusic"); loveMusic.pause(); loveMusic.currentTime = 0;
 
-  const response = document.getElementById("loveResponse");
-  response.style.display = "none";
+const response = document.getElementById("loveResponse"); response.style.display = "none"; response.querySelector(".ring-emoji").classList.remove("grow-ring"); };
 
-  const ring = response.querySelector(".ring-emoji");
-  ring.classList.remove("grow-ring");
-};
+document.querySelectorAll('.loveAnswerBtn').forEach(btn => { btn.onclick = () => { const response = document.getElementById("loveResponse"); response.style.display = "block"; const ring = response.querySelector(".ring-emoji"); if (!ring.classList.contains("grow-ring")) { ring.classList.add("grow-ring"); } }; });
 
-document.querySelectorAll('.loveAnswerBtn').forEach(btn => {
-  btn.onclick = () => {
-    const response = document.getElementById("loveResponse");
-    response.style.display = "block";
-
-    const ring = response.querySelector(".ring-emoji");
-    if (!ring.classList.contains("grow-ring")) {
-      ring.classList.add("grow-ring");
-    }
-  };
-});
-
-// 🎮 لعبة تعرفني؟
-const questions = [
-  "Akther equipe nhebha?⚽",
-  "Akthr équipe nhebha fi touns?⚽🇹🇳",
-  "Akthr karhba nhbhaa?🚗",
-  "Akthr joueur nhbou🐐",
-  "Chnya section eli na9ra fiha🧠",
-  "Chnya akthr matière nhbha📚",
-  "Chnya nhb nwli fi lmosta9l👷",
-  "Chnya no9tet dho3fi🫣",
-  "Kelma dima nawedha🔁",
-  "Akthr loun nhbu❓",
-  "Win nhb n3ich 🇦🇬",
-  "Akthr heja t8achechni🤬",
-  "Nhb nes taarfni ka chnw💭",
-  "Akthr rapeur nhbu🎤",
-  "Akthr 8neya nhbha🎧",
-  "nhb lhayawent?w chnya akthr hayawen nhbu🐕",
-  "Chnya lheja eli tkrzni ki t9ulha?🖕🏿",
-  "Heja modmen aaliha w nhb na7iha🍾",
-  "Heja t3jbni fik👀",
-  "Akthr sport nhbu 🏃🏻‍♂️"
-];
+// 🎮 لعبة "تعرفني؟" const questions = [ "Akther equipe nhebha?⚽", "Akthr équipe nhebha fi touns?⚽🇹🇳", "Akthr karhba nhbhaa?🚗", "Akthr joueur nhbou🐐", "Chnya section eli na9ra fiha🧠", "Chnya akthr matière nhbha📚", "Chnya nhb nwli fi lmosta9l👷", "Chnya no9tet dho3fi🫣", "Kelma dima nawedha🔁", "Akthr loun nhbu❓", "Win nhb n3ich 🇦🇬", "Akthr heja t8achechni🤬", "Nhb nes taarfni ka chnw💭", "Akthr rapeur nhbu🎤", "Akthr 8neya nhbha🎧", "nhb lhayawent?w chnya akthr hayawen nhbu🐕", "Chnya lheja eli tkrzni ki t9ulha?🖕🏿", "Heja modmen aaliha w nhb na7iha🍾", "Heja t3jbni fik👀", "Akthr sport nhbu 🏃🏻‍♂️" ];
 
 let used = [], current = 0, score = 0;
 
-document.getElementById('startQuizBtn').onclick = () => {
-  document.getElementById('quizOverlay').style.display = 'flex';
-  generateHearts();
+const quizOverlay = document.getElementById('quizOverlay'); const questionText = document.getElementById('questionText'); const questionBox = document.getElementById('questionBox'); const resultBox = document.getElementById('resultBox'); const resultText = document.getElementById('resultText'); const quizMusic = document.getElementById('quizMusic');
 
-  const mainMusic = document.getElementById('myAudio');
-  if (!mainMusic.paused) mainMusic.pause();
-};
+const correctSound = new Audio("correct.mp3"); const wrongSound = new Audio("wrong.mp3");
 
-function generateHearts() {
-  const grid = document.getElementById('heartGrid');
-  grid.innerHTML = '';
-  for (let i = 0; i < questions.length; i++) {
-    const btn = document.createElement('div');
-    btn.className = 'heart-btn';
-    btn.innerText = '💌';
-    btn.onclick = () => showQuestion(i, btn);
-    grid.appendChild(btn);
-  }
-}
+// ابدأ اللعبة const startQuizBtn = document.getElementById('startQuizBtn'); startQuizBtn.onclick = () => { quizOverlay.style.display = 'flex'; generateHearts(); if (!mainAudio.paused) mainAudio.pause(); };
 
-function showQuestion(i, btn) {
-  if (used.includes(i)) return;
-  used.push(i);
-  current++;
-  btn.innerText = '📧';
-  document.getElementById('questionText').innerText = questions[i];
-  document.getElementById('questionBox').style.display = 'block';
+function generateHearts() { const grid = document.getElementById('heartGrid'); grid.innerHTML = ''; for (let i = 0; i < questions.length; i++) { const btn = document.createElement('div'); btn.className = 'heart-btn'; btn.innerText = '💌'; btn.onclick = () => showQuestion(i, btn); grid.appendChild(btn); } }
 
-  const music = document.getElementById('quizMusic');
-  if (music.paused) music.play().catch(() => {});
-}
+function showQuestion(i, btn) { if (used.includes(i)) return; used.push(i); current++; btn.innerText = '📧'; btn.style.pointerEvents = 'none'; btn.style.opacity = 0.6;
 
-document.querySelectorAll('.answerBtn').forEach(btn => {
-  btn.onclick = () => {
-    const knows = btn.getAttribute('data-answer') === 'true';
-    document.getElementById('questionBox').style.display = 'none';
-    if (knows) score++;
-    if (current === questions.length) showResult();
-  };
-});
+questionText.innerText = ${questions[i]}\n✅ ${score}/${questions.length}; questionBox.style.display = 'block'; if (quizMusic.paused) quizMusic.play().catch(() => {}); }
 
-function showResult() {
-  const p = Math.round((score / questions.length) * 100);
-  let msg = '', color = '';
+document.querySelectorAll('.answerBtn').forEach(btn => { btn.onclick = () => { const knows = btn.getAttribute('data-answer') === 'true'; questionBox.style.display = 'none'; if (knows) { score++; correctSound.play(); } else { wrongSound.play(); } if (current === questions.length) showResult(); }; });
 
-  if (p < 50) {
-    msg = 'bh 🖕🏿🖕🏿🖕🏿';
-    color = '#ff4444';
-  } else if (p <= 75) {
-    msg = 'bh 👍👍👍';
-    color = '#ffc107';
-  } else {
-    msg = 'nhbk 💋';
-    color = '#28a745';
-  }
+function showResult() { const p = Math.round((score / questions.length) * 100); let msg = '', color = ''; if (p < 50) { msg = 'bh 🖕🏿🖕🏿🖕🏿'; color = '#ff4444'; } else if (p <= 75) { msg = 'bh 👍👍👍'; color = '#ffc107'; } else { msg = 'nhbk 💋'; color = '#28a745'; } resultText.innerText = نتيجتك: ${p}% → ${msg}; resultText.style.color = color; resultBox.style.display = 'block';
 
-  const resultText = document.getElementById('resultText');
-  resultText.innerText = `نتيجتك: ${p}% → ${msg}`;
-  resultText.style.color = color;
-  resultText.style.fontSize = '2.5em';
-  resultText.style.fontWeight = 'bold';
-  document.getElementById('resultBox').style.display = 'block';
-}
+// زر إعادة المحاولة const retryBtn = document.createElement("button"); retryBtn.innerText = "🔁 أعد المحاولة"; retryBtn.onclick = resetGame; resultBox.appendChild(retryBtn); }
 
-document.getElementById('closeQuizBtn').onclick =
-document.getElementById('closeQuizBtn2').onclick = () => {
-  document.getElementById('quizOverlay').style.display = 'none';
-  document.getElementById('questionBox').style.display = 'none';
-  document.getElementById('resultBox').style.display = 'none';
+function resetGame() { used = []; current = 0; score = 0; resultBox.style.display = 'none'; questionBox.style.display = 'none'; quizOverlay.style.display = 'none'; resultBox.innerHTML = '<p id="resultText"></p>'; quizMusic.pause(); quizMusic.currentTime = 0; mainAudio.play().catch(() => {}); }
 
-  const quizMusic = document.getElementById('quizMusic');
-  quizMusic.pause();
-  quizMusic.currentTime = 0;
+document.getElementById('closeQuizBtn').onclick = document.getElementById('closeQuizBtn2').onclick = resetGame;
 
-  const mainMusic = document.getElementById('myAudio');
-  mainMusic.play().catch(() => {});
-
-  used = [];
-  current = 0;
-  score = 0;
-};
