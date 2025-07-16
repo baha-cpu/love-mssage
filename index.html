@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <title>my princess ♥</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <!-- قلوب متحركة -->
-  <script src="script.js" defer></script>
 
-  <!-- زر تشغيل الموسيقى -->
-  <button id="musicBtn">
-    lahdhaa 1 - Click here (music)
-  </button>
+  <!-- ♥ القلب الدرامي في المنتصف ♥ -->
+  <div id="introHeart" class="intro-heart">❤️</div>
+
+  <!-- زر الموسيقى -->
+  <button id="musicBtn">lahdhaa 1-Click here(music)</button>
   <audio id="myAudio" loop>
     <source src="love.mp3" type="audio/mpeg" />
   </audio>
 
-  <!-- محتوى الرسالة -->
+  <!-- الرسالة -->
   <div class="container">
     <h1>hbyby ♥</h1>
     <p>
@@ -26,7 +26,7 @@
       <strong>nhebk btafasilk lkol wras 9lby ♥</strong>
     </p>
     <button id="secretBtn">hbyby click 3l music w baad Click here ♥</button>
-    <div id="secretMessage">
+    <div id="secretMessage" style="display:none;">
       fi 9lby tofla khw much ki ay tofla nhebk<br />
       w nmut fik w much bch tnajm ay tofla fi denya<br />
       t3awdhk w mostahil tkun 5ir mn bnty w martii ye mozzaaa💋💍
@@ -34,7 +34,7 @@
   </div>
 
   <!-- ♥ اللعبة السحرية ♥ -->
-  <div id="loveGame">
+  <div id="loveGame" class="love-game" style="display:none;">
     <button id="closeGameBtn">× إغلاق</button>
     <h2>jewb ♥</h2>
     <p>taares beyaa?🤵🏻‍♂️👰🏾‍♀️</p>
@@ -42,32 +42,39 @@
       <button class="loveAnswerBtn">btbi3aa ❤️</button>
       <button class="loveAnswerBtn">akiid 💘</button>
     </div>
-    <p id="loveResponse">cheddd <span class="ring-emoji">💍</span></p>
+    <p id="loveResponse" style="display:none;">cheddd <span class="ring-emoji">💍</span></p>
     <audio id="loveMusic" loop>
       <source src="romantic.mp3" type="audio/mpeg" />
     </audio>
   </div>
 
-  <!-- زر تفعيل اللعبة -->
-  <button id="startGameBtn">magic game for u ♥</button>
+  <!-- زر تفعيل اللعبة السحرية -->
+  <button id="startGameBtn" class="floating-btn">magic game for u ♥</button>
 
-  <!-- لعبة \"تعرفني؟\" التفاعلية -->
-  <div id="quizOverlay">
+  <!-- لعبة \"تعرفني؟\" -->
+  <div id="quizOverlay" class="quiz-overlay" style="display:none;">
     <button id="closeQuizBtn">×</button>
     <div id="heartGrid"></div>
-    <div id="questionBox">
+
+    <div id="questionBox" style="display:none;">
       <p id="questionText"></p>
+      <div id="timer">⏱️ 30s</div>
       <button class="answerBtn" data-answer="true">أعرف</button>
       <button class="answerBtn" data-answer="false">لا أعرف</button>
     </div>
-    <div id="resultBox">
+
+    <div id="resultBox" style="display:none;">
       <p id="resultText"></p>
       <button id="closeQuizBtn2">إغلاق</button>
     </div>
+
     <audio id="quizMusic" loop>
       <source src="lovely.mp3" type="audio/mpeg">
     </audio>
   </div>
-  <button id="startQuizBtn">ابدأ لعبة تعرفني؟ 💘</button>
+
+  <!-- زر تشغيل لعبة تعرفني -->
+  <button id="startQuizBtn" class="floating-btn top">ابدأ لعبة تعرفني؟ 💘</button>
+
 </body>
 </html>
