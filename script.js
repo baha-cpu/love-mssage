@@ -192,5 +192,4 @@ function resetGame() {
 }
 
 // زر الإغلاق
-document.getElementById('closeQuizBtn').onclick =
-document.getElementById('closeQuizBtn2').onclick = resetGame;
+document.getElementById('closeQuizBtn').onclick = resetGame;
