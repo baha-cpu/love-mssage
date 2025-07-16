@@ -1,470 +1,448 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>my princess ♥</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");
+<!DOCTYPE html>  <html lang="ar" dir="rtl">  
+  <head>  
+    <meta charset="UTF-8" />  
+    <title>my princess ♥</title>  
+    <style>  
+      @import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");  * {  
+    margin: 0;  
+    padding: 0;  
+    box-sizing: border-box;  
+  }  
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+  body {  
+    font-family: "Cairo", sans-serif;  
+    height: 100vh;  
+    background: url("background.jpg") no-repeat center center fixed;  
+    background-size: cover;  
+    position: relative;  
+    overflow: hidden;  
+    display: flex;  
+    justify-content: center;  
+    align-items: center;  
+  }  
 
-      body {
-        font-family: "Cairo", sans-serif;
-        height: 100vh;
-        background: url("background.jpg") no-repeat center center fixed;
-        background-size: cover;
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+  .container {  
+    background: rgba(255, 255, 255, 0.85);  
+    padding: 30px;  
+    border-radius: 20px;  
+    text-align: center;  
+    box-shadow: 0 0 25px rgba(255, 0, 102, 0.4);  
+    max-width: 90%;  
+  }  
 
-      .container {
-        background: rgba(255, 255, 255, 0.85);
-        padding: 30px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 0 25px rgba(255, 0, 102, 0.4);
-        max-width: 90%;
-      }
+  h1 {  
+    font-size: 2.5em;  
+    color: #cc0066;  
+    margin-bottom: 20px;  
+  }  
 
-      h1 {
-        font-size: 2.5em;
-        color: #cc0066;
-        margin-bottom: 20px;
-      }
+  p {  
+    font-size: 1.3em;  
+    color: #333;  
+    margin-bottom: 20px;  
+  }  
 
-      p {
-        font-size: 1.3em;
-        color: #333;
-        margin-bottom: 20px;
-      }
+  button {  
+    background-color: #ff3366;  
+    border: none;  
+    padding: 10px 25px;  
+    border-radius: 25px;  
+    font-size: 1em;  
+    color: white;  
+    cursor: pointer;  
+    transition: 0.3s ease;  
+  }  
 
-      button {
-        background-color: #ff3366;
-        border: none;
-        padding: 10px 25px;
-        border-radius: 25px;
-        font-size: 1em;
-        color: white;
-        cursor: pointer;
-        transition: 0.3s ease;
-      }
+  button:hover {  
+    background-color: #e6004c;  
+  }  
 
-      button:hover {
-        background-color: #e6004c;
-      }
+  #secretMessage {  
+    display: none;  
+    font-size: 1.2em;  
+    margin-top: 20px;  
+    color: #cc0033;  
+    font-weight: bold;  
+  }  
 
-      #secretMessage {
-        display: none;
-        font-size: 1.2em;
-        margin-top: 20px;
-        color: #cc0033;
-        font-weight: bold;
-      }
+  .heart {  
+    position: absolute;  
+    font-size: 24px;  
+    color: red;  
+    animation: float 5s infinite ease-in-out;  
+  }  
 
-      .heart {
-        position: absolute;
-        font-size: 24px;
-        color: red;
-        animation: float 5s infinite ease-in-out;
-      }
+  @keyframes float {  
+    0% {  
+      transform: translateY(100vh) scale(1);  
+      opacity: 1;  
+    }  
+    100% {  
+      transform: translateY(-100px) scale(1.5);  
+      opacity: 0;  
+    }  
+  }  
+</style>
 
-      @keyframes float {
-        0% {
-          transform: translateY(100vh) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-100px) scale(1.5);
-          opacity: 0;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <!-- قلوب متحركة -->
-    <script>
-      for (let i = 0; i < 20; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = 3 + Math.random() * 4 + "s";
-        document.body.appendChild(heart);
-      }
-    </script>
+  </head>  
+  <body>  
+    <!-- قلوب متحركة -->  
+    <script>  
+      for (let i = 0; i < 20; i++) {  
+        let heart = document.createElement("div");  
+        heart.className = "heart";  
+        heart.innerHTML = "❤️";  
+        heart.style.left = Math.random() * 100 + "vw";  
+        heart.style.animationDuration = 3 + Math.random() * 4 + "s";  
+        document.body.appendChild(heart);  
+      }  
+    </script>  <!-- موسيقى رومانسية -->  
+<button onclick="document.getElementById('myAudio').play()">  
+  lahdhaa 1-Click here(music)  
+</button>  
 
-    <!-- موسيقى رومانسية -->
-    <button onclick="document.getElementById('myAudio').play()">
-      lahdhaa 1-Click here(music)
-    </button>
+<audio id="myAudio" loop>  
+  <source src="love.mp3" type="audio/mpeg" />  
+</audio>  
 
-    <audio id="myAudio" loop>
-      <source src="love.mp3" type="audio/mpeg" />
-    </audio>
-
-    <!-- محتوى الرسالة -->
-    <div class="container">
-      <h1>hbyby ♥</h1>
-      <p>
-        lklem mouch bch ywaselk 9edeh nhebk <br />
-        ama rw nhebk barcha mon princesse...<br />
-        <strong>nhebk btafasilk lkol wras 9lby ♥</strong>
-      </p>
-      <button
-        onclick="document.getElementById('secretMessage').style.display='block'"
-      >
-        hbyby click 3l music w baad Click here ♥
-      </button>
-      <div id="secretMessage">
-        fi 9lby tofla khw much ki ay tofla nhebk<br />
-        w nmut fik w much bch tnajm ay tofla fi denya<br />
-        t3awdhk w mostahil tkun 5ir mn bnty w martii ye mozzaaa💋💍
-      </div>
-    </div>
-<!-- ♥ اللعبة السحرية ♥ -->
-<div
-  id="loveGame"
-  style="
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.97);
-    z-index: 9999;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Cairo', sans-serif;
-    animation: fadeIn 1s ease;
-  "
->
-  <button
-    onclick="closeLoveGame()"
-    style="
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      background: #cc0066;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 20px;
-      font-size: 1em;
-      cursor: pointer;
-      box-shadow: 0 0 8px #ff3399;
-      z-index: 10000;
-    "
-  >
-    × إغلاق
-  </button>
-
-  <h2
-    style="
-      color: #cc0066;
-      font-size: 2.5em;
-      margin-bottom: 20px;
-      animation: pop 1s ease;
-    "
-  >
-    jewb ♥
-  </h2>
-  <p
-    style="
-      font-size: 1.5em;
-      margin-bottom: 30px;
-      color: #333;
-      animation: fadeIn 2s ease;
-    "
-  >
-    taares beyaa?🤵🏻‍♂️👰🏾‍♀️
-  </p>
-  <div style="animation: fadeIn 2.5s ease;">
-    <button
-      onclick="loveAnswer()"
-      style="
-        margin: 0 15px;
-        background-color: #ff3399;
-        border: none;
-        padding: 12px 30px;
-        border-radius: 25px;
-        font-size: 1.1em;
-        color: white;
-        cursor: pointer;
-      "
-    >
-      btbi3aa ❤️
-    </button>
-    <button
-      onclick="loveAnswer()"
-      style="
-        margin: 0 15px;
-        background-color: #cc0066;
-        border: none;
-        padding: 12px 30px;
-        border-radius: 25px;
-        font-size: 1.1em;
-        color: white;
-        cursor: pointer;
-      "
-    >
-      akiid 💘
-    </button>
-  </div>
-  <p
-    id="loveResponse"
-    style="
-      margin-top: 40px;
-      font-size: 1.4em;
-      color: #cc0033;
-      display: none;
-      animation: fadeIn 3s ease;
-    "
-  >
-    cheddd <span class="ring-emoji">💍</span>
-  </p>
-
-  <audio id="loveMusic" loop>
-    <source src="romantic.mp3" type="audio/mpeg" />
-  </audio>
+<!-- محتوى الرسالة -->  
+<div class="container">  
+  <h1>hbyby ♥</h1>  
+  <p>  
+    lklem mouch bch ywaselk 9edeh nhebk <br />  
+    ama rw nhebk barcha mon princesse...<br />  
+    <strong>nhebk btafasilk lkol wras 9lby ♥</strong>  
+  </p>  
+  <button  
+    onclick="document.getElementById('secretMessage').style.display='block'"  
+  >  
+    hbyby click 3l music w baad Click here ♥  
+  </button>  
+  <div id="secretMessage">  
+    fi 9lby tofla khw much ki ay tofla nhebk<br />  
+    w nmut fik w much bch tnajm ay tofla fi denya<br />  
+    t3awdhk w mostahil tkun 5ir mn bnty w martii ye mozzaaa💋💍  
+  </div>  
 </div>
 
-<!-- زر تفعيل اللعبة -->
-<button
-  onclick="startLoveGame()"
-  style="
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: #ff3399;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-size: 1em;
-    cursor: pointer;
-    box-shadow: 0 0 10px #ff99cc;
-  "
->
-  magic game for u ♥
+<!-- ♥ اللعبة السحرية ♥ -->  <div  
+  id="loveGame"  
+  style="  
+    display: none;  
+    position: fixed;  
+    top: 0; left: 0;  
+    width: 100%; height: 100%;  
+    background: rgba(255, 255, 255, 0.97);  
+    z-index: 9999;  
+    flex-direction: column;  
+    justify-content: center;  
+    align-items: center;  
+    font-family: 'Cairo', sans-serif;  
+    animation: fadeIn 1s ease;  
+  "  
+>  
+  <button  
+    onclick="closeLoveGame()"  
+    style="  
+      position: absolute;  
+      top: 15px;  
+      right: 15px;  
+      background: #cc0066;  
+      color: white;  
+      border: none;  
+      padding: 10px 15px;  
+      border-radius: 20px;  
+      font-size: 1em;  
+      cursor: pointer;  
+      box-shadow: 0 0 8px #ff3399;  
+      z-index: 10000;  
+    "  
+  >  
+    × إغلاق  
+  </button>    <h2  
+    style="  
+      color: #cc0066;  
+      font-size: 2.5em;  
+      margin-bottom: 20px;  
+      animation: pop 1s ease;  
+    "  
+  >  
+    jewb ♥  
+  </h2>  
+  <p  
+    style="  
+      font-size: 1.5em;  
+      margin-bottom: 30px;  
+      color: #333;  
+      animation: fadeIn 2s ease;  
+    "  
+  >  
+    taares beyaa?🤵🏻‍♂️👰🏾‍♀️  
+  </p>  
+  <div style="animation: fadeIn 2.5s ease;">  
+    <button  
+      onclick="loveAnswer()"  
+      style="  
+        margin: 0 15px;  
+        background-color: #ff3399;  
+        border: none;  
+        padding: 12px 30px;  
+        border-radius: 25px;  
+        font-size: 1.1em;  
+        color: white;  
+        cursor: pointer;  
+      "  
+    >  
+      btbi3aa ❤️  
+    </button>  
+    <button  
+      onclick="loveAnswer()"  
+      style="  
+        margin: 0 15px;  
+        background-color: #cc0066;  
+        border: none;  
+        padding: 12px 30px;  
+        border-radius: 25px;  
+        font-size: 1.1em;  
+        color: white;  
+        cursor: pointer;  
+      "  
+    >  
+      akiid 💘  
+    </button>  
+  </div>  
+  <p  
+    id="loveResponse"  
+    style="  
+      margin-top: 40px;  
+      font-size: 1.4em;  
+      color: #cc0033;  
+      display: none;  
+      animation: fadeIn 3s ease;  
+    "  
+  >  
+    cheddd <span class="ring-emoji">💍</span>  
+  </p>    <audio id="loveMusic" loop>  
+    <source src="romantic.mp3" type="audio/mpeg" />  
+  </audio>  
+</div>  <!-- زر تفعيل اللعبة -->  <button
+onclick="startLoveGame()"
+style="
+position: fixed;
+bottom: 20px;
+left: 20px;
+background: #ff3399;
+color: white;
+border: none;
+padding: 10px 20px;
+border-radius: 30px;
+font-size: 1em;
+cursor: pointer;
+box-shadow: 0 0 10px #ff99cc;
+"
+
+> 
+
+magic game for u ♥
 </button>
 
-<style>
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+<style>  
+  @keyframes fadeIn {  
+    from {  
+      opacity: 0;  
+    }  
+    to {  
+      opacity: 1;  
+    }  
+  }  
+  
+  @keyframes pop {  
+    0% {  
+      transform: scale(0.8);  
+      opacity: 0;  
+    }  
+    100% {  
+      transform: scale(1);  
+      opacity: 1;  
+    }  
+  }  
+  
+  /* أنيميشن تكبير وتصغير الخاتم بشكل مستمر */  
+  @keyframes ringGrow {  
+    0% {  
+      transform: scale(1);  
+    }  
+    50% {  
+      transform: scale(2.5);  
+    }  
+    100% {  
+      transform: scale(1);  
+    }  
+  }  
+  
+  .grow-ring {  
+    display: inline-block;  
+    animation: ringGrow 2s ease-in-out infinite;  
+  }  
+</style>  <script>  
+  function startLoveGame() {  
+    const loveGame = document.getElementById("loveGame");  
+    loveGame.style.display = "flex";  
+  
+    const music = document.getElementById("loveMusic");  
+    if (music.paused) {  
+      music.play().catch(() => {  
+        console.log("User gesture required for autoplay");  
+      });  
+    }  
+  }  
+  
+  function loveAnswer() {  
+    const response = document.getElementById("loveResponse");  
+    response.style.display = "block";  
+  
+    const ring = response.querySelector(".ring-emoji");  
+  
+    // أضف الكلاس لتشغيل الأنيميشن المستمر  
+    if (!ring.classList.contains("grow-ring")) {  
+      ring.classList.add("grow-ring");  
+    }  
+  }  
+  
+  function closeLoveGame() {  
+    const loveGame = document.getElementById("loveGame");  
+    loveGame.style.display = "none";  
+  
+    const music = document.getElementById("loveMusic");  
+    music.pause();  
+    music.currentTime = 0;  
+  
+    const response = document.getElementById("loveResponse");  
+    response.style.display = "none";  
+  
+    // إزالة الأنيميشن لما تغلق اللعبة  
+    const ring = response.querySelector(".ring-emoji");  
+    ring.classList.remove("grow-ring");  
+  }  
+</script>  <!-- لعبة "تعرفني؟" التفاعلية -->  <div id="quizOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:10000;justify-content:flex-start;align-items:center;flex-direction:column;color:white;padding:20px;font-family:'Cairo',sans-serif;">  
+  <button onclick="closeQuiz()" style="position:absolute;top:20px;right:20px;font-size:2em;color:white;border:none;background:transparent;cursor:pointer;">×</button>    <div id="heartGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(60px, 1fr));gap:20px;max-width:600px;margin-top:30px;">  
+    <!-- القلوب تتولد آليًا -->  
+  </div>    <div id="questionBox" style="text-align:center;max-width:90%;margin-top:40px;display:none;">  
+    <p id="questionText" style="font-size:2em;margin-bottom:30px;color:#fff;"></p>  
+    <button onclick="answer(true)" style="padding:15px 30px;margin:0 10px;font-size:1.2em;border-radius:15px;background:#28a745;color:white;border:none;">أعرف</button>  
+    <button onclick="answer(false)" style="padding:15px 30px;margin:0 10px;font-size:1.2em;border-radius:15px;background:#dc3545;color:white;border:none;">لا أعرف</button>  
+  </div>    <div id="resultBox" style="text-align:center;margin-top:30px;display:none;">  
+    <p id="resultText" style="font-size:2em;margin-bottom:20px;"></p>  
+    <button onclick="closeQuiz()" style="padding:10px 20px;font-size:1.1em;border-radius:10px;">إغلاق</button>  
+  </div>    <audio id="quizMusic" loop>  
+    <source src="lovely.mp3" type="audio/mpeg">  
+  </audio>  
+</div>  <!-- زر تشغيل اللعبة -->  <button onclick="startQuiz()" style="position:fixed;top:20px;left:20px;padding:12px 22px;background:#ff3399;color:white;border:none;border-radius:25px;cursor:pointer;z-index:9999;font-size:1em;">ابدأ لعبة تعرفني؟ 💘</button>
 
-  @keyframes pop {
-    0% {
-      transform: scale(0.8);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  /* أنيميشن تكبير وتصغير الخاتم بشكل مستمر */
-  @keyframes ringGrow {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(2.5);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-
-  .grow-ring {
-    display: inline-block;
-    animation: ringGrow 2s ease-in-out infinite;
-  }
-</style>
-
-<script>
-  function startLoveGame() {
-    const loveGame = document.getElementById("loveGame");
-    loveGame.style.display = "flex";
-
-    const music = document.getElementById("loveMusic");
-    if (music.paused) {
-      music.play().catch(() => {
-        console.log("User gesture required for autoplay");
-      });
-    }
-  }
-
-  function loveAnswer() {
-    const response = document.getElementById("loveResponse");
-    response.style.display = "block";
-
-    const ring = response.querySelector(".ring-emoji");
-
-    // أضف الكلاس لتشغيل الأنيميشن المستمر
-    if (!ring.classList.contains("grow-ring")) {
-      ring.classList.add("grow-ring");
-    }
-  }
-
-  function closeLoveGame() {
-    const loveGame = document.getElementById("loveGame");
-    loveGame.style.display = "none";
-
-    const music = document.getElementById("loveMusic");
-    music.pause();
-    music.currentTime = 0;
-
-    const response = document.getElementById("loveResponse");
-    response.style.display = "none";
-
-    // إزالة الأنيميشن لما تغلق اللعبة
-    const ring = response.querySelector(".ring-emoji");
-    ring.classList.remove("grow-ring");
-  }
-</script>
-<!-- لعبة "تعرفني؟" التفاعلية -->
-<div id="quizOverlay" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:10000;justify-content:flex-start;align-items:center;flex-direction:column;color:white;padding:20px;font-family:'Cairo',sans-serif;">
-  <button onclick="closeQuiz()" style="position:absolute;top:20px;right:20px;font-size:2em;color:white;border:none;background:transparent;cursor:pointer;">×</button>
-
-  <div id="heartGrid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(60px, 1fr));gap:20px;max-width:600px;margin-top:30px;">
-    <!-- القلوب تتولد آليًا -->
-  </div>
-
-  <div id="questionBox" style="text-align:center;max-width:90%;margin-top:40px;display:none;">
-    <p id="questionText" style="font-size:2em;margin-bottom:30px;color:#fff;"></p>
-    <button onclick="answer(true)" style="padding:15px 30px;margin:0 10px;font-size:1.2em;border-radius:15px;background:#28a745;color:white;border:none;">أعرف</button>
-    <button onclick="answer(false)" style="padding:15px 30px;margin:0 10px;font-size:1.2em;border-radius:15px;background:#dc3545;color:white;border:none;">لا أعرف</button>
-  </div>
-
-  <div id="resultBox" style="text-align:center;margin-top:30px;display:none;">
-    <p id="resultText" style="font-size:2em;margin-bottom:20px;"></p>
-    <button onclick="closeQuiz()" style="padding:10px 20px;font-size:1.1em;border-radius:10px;">إغلاق</button>
-  </div>
-
-  <audio id="quizMusic" loop>
-    <source src="lovely.mp3" type="audio/mpeg">
-  </audio>
-</div>
-
-<!-- زر تشغيل اللعبة -->
-<button onclick="startQuiz()" style="position:fixed;top:20px;left:20px;padding:12px 22px;background:#ff3399;color:white;border:none;border-radius:25px;cursor:pointer;z-index:9999;font-size:1em;">ابدأ لعبة تعرفني؟ 💘</button>
-
-<style>
-.heart-btn {
-  font-size: 3.5em;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  text-align: center;
-}
-.heart-btn:hover {
-  transform: scale(1.2);
-}
-</style>
-
-<script>
-const questions = [
-  "Akther equipe nhebha?⚽",
-  "Akthr équipe nhebha fi touns?⚽🇹🇳",
-  "Akthr karhba nhbhaa?🚗",
-  "Akthr joueur nhbou🐐",
-  "Chnya section eli na9ra fiha🧠",
-  "Chnya akthr matière nhbha📚",
-  "Chnya nhb nwli fi lmosta9l👷",
-  "Chnya no9tet dho3fi🫣",
-  "Kelma dima nawedha🔁",
-  "Akthr loun nhbu❓",
-  "Win nhb n3ich 🇦🇬",
-  "Akthr heja t8achechni🤬",
-  "Nhb nes taarfni ka chnw💭",
-  "Akthr rapeur nhbu🎤",
-  "Akthr 8neya nhbha🎧",
-  "nhb lhayawent?w chnya akthr hayawen nhbu🐕",
-  "Chnya lheja eli tkrzni ki t9ulha?🖕🏿",
-  "Heja modmen aaliha w nhb na7iha🍾",
-  "Heja t3jbni fik👀",
-  "Akthr sport nhbu 🏃🏻‍♂️"
-];
-let used = [], current = 0, score = 0;
-
-function startQuiz(){
-  document.getElementById('quizOverlay').style.display='flex';
-  generateHearts();
-}
-
-function generateHearts(){
-  const grid = document.getElementById('heartGrid');
-  grid.innerHTML = '';
-  for (let i = 0; i < questions.length; i++) {
-    const btn = document.createElement('div');
-    btn.className = 'heart-btn';
-    btn.innerText = '💌';
-    btn.onclick = () => showQuestion(i, btn);
-    grid.appendChild(btn);
-  }
-}
-
-function showQuestion(i, btn){
-  if (used.includes(i)) return;
-  used.push(i);
-  btn.innerText = '📧'; // تحويل القلب إلى مغلف
-  current++;
-  document.getElementById('questionText').innerText = questions[i];
-  document.getElementById('questionBox').style.display = 'block';
-
-  const music = document.getElementById('quizMusic');
-  if (music.paused) music.play().catch(()=>{});
-}
-
-function answer(knows){
-  document.getElementById('questionBox').style.display = 'none';
-  if (knows) score++;
-  if (current === questions.length) showResult();
-}
-
-function showResult(){
-  const p = Math.round(score / questions.length * 100);
-  let msg = '', color = '';
-
-  if (p < 50) {
-    msg = 'bh 🖕🏿🖕🏿🖕🏿';
-    color = '#ff4444'; // أحمر
-  } else if (p <= 75) {
-    msg = 'bh 👍👍👍';
-    color = '#ffc107'; // أصفر
-  } else {
-    msg = 'nhbk 💋';
-    color = '#28a745'; // أخضر
-  }
-
-  const resultText = document.getElementById('resultText');
-  resultText.innerText = `نتيجتك: ${p}% → ${msg}`;
-  resultText.style.color = color;
-  resultText.style.fontSize = '2.5em';
-  resultText.style.fontWeight = 'bold';
-  document.getElementById('resultBox').style.display = 'block';
-}
-function closeQuiz(){
-  document.getElementById('quizOverlay').style.display = 'none';
-  document.getElementById('questionBox').style.display = 'none';
-  document.getElementById('resultBox').style.display = 'none';
-  document.getElementById('quizMusic').pause();
-  document.getElementById('quizMusic').currentTime = 0;
-  used = []; current = 0; score = 0;
-}
-</script>
-  </body>
+<style>  
+.heart-btn {  
+  font-size: 3.5em;  
+  cursor: pointer;  
+  transition: transform 0.3s ease;  
+  text-align: center;  
+}  
+.heart-btn:hover {  
+  transform: scale(1.2);  
+}  
+</style>  <script>  
+const questions = [  
+  "Akther equipe nhebha?⚽",  
+  "Akthr équipe nhebha fi touns?⚽🇹🇳",  
+  "Akthr karhba nhbhaa?🚗",  
+  "Akthr joueur nhbou🐐",  
+  "Chnya section eli na9ra fiha🧠",  
+  "Chnya akthr matière nhbha📚",  
+  "Chnya nhb nwli fi lmosta9l👷",  
+  "Chnya no9tet dho3fi🫣",  
+  "Kelma dima nawedha🔁",  
+  "Akthr loun nhbu❓",  
+  "Win nhb n3ich 🇦🇬",  
+  "Akthr heja t8achechni🤬",  
+  "Nhb nes taarfni ka chnw💭",  
+  "Akthr rapeur nhbu🎤",  
+  "Akthr 8neya nhbha🎧",  
+  "nhb lhayawent?w chnya akthr hayawen nhbu🐕",  
+  "Chnya lheja eli tkrzni ki t9ulha?🖕🏿",  
+  "Heja modmen aaliha w nhb na7iha🍾",  
+  "Heja t3jbni fik👀",  
+  "Akthr sport nhbu 🏃🏻‍♂️"  
+];  
+let used = [], current = 0, score = 0;  
+  
+function startQuiz(){  
+  document.getElementById('quizOverlay').style.display='flex';  
+  generateHearts();  
+}  
+  
+function generateHearts(){  
+  const grid = document.getElementById('heartGrid');  
+  grid.innerHTML = '';  
+  for (let i = 0; i < questions.length; i++) {  
+    const btn = document.createElement('div');  
+    btn.className = 'heart-btn';  
+    btn.innerText = '💌';  
+    btn.onclick = () => showQuestion(i, btn);  
+    grid.appendChild(btn);  
+  }  
+}  
+  
+function showQuestion(i, btn){  
+  if (used.includes(i)) return;  
+  used.push(i);  
+  btn.innerText = '📧'; // تحويل القلب إلى مغلف  
+  current++;  
+  document.getElementById('questionText').innerText = questions[i];  
+  document.getElementById('questionBox').style.display = 'block';  
+  // نوقّف موسيقى الصفحة الرئيسية
+const mainMusic = document.getElementById('myAudio');
+if (!mainMusic.paused) mainMusic.pause();
+  const music = document.getElementById('quizMusic');  
+  if (music.paused) music.play().catch(()=>{});  
+}  
+  
+function answer(knows){  
+  document.getElementById('questionBox').style.display = 'none';  
+  if (knows) score++;  
+  if (current === questions.length) showResult();  
+}  
+  
+function showResult(){  
+  const p = Math.round(score / questions.length * 100);  
+  let msg = '', color = '';  
+  
+  if (p < 50) {  
+    msg = 'bh 🖕🏿🖕🏿🖕🏿';  
+    color = '#ff4444'; // أحمر  
+  } else if (p <= 75) {  
+    msg = 'bh 👍👍👍';  
+    color = '#ffc107'; // أصفر  
+  } else {  
+    msg = 'nhbk 💋';  
+    color = '#28a745'; // أخضر  
+  }  
+  
+  const resultText = document.getElementById('resultText');  
+  resultText.innerText = `نتيجتك: ${p}% → ${msg}`;  
+  resultText.style.color = color;  
+  resultText.style.fontSize = '2.5em';  
+  resultText.style.fontWeight = 'bold';  
+  document.getElementById('resultBox').style.display = 'block';  
+}  
+function closeQuiz(){  
+  document.getElementById('quizOverlay').style.display = 'none';  
+  document.getElementById('questionBox').style.display = 'none';  
+  document.getElementById('resultBox').style.display = 'none';  
+  document.getElementById('quizMusic').pause();  
+// نرجّع موسيقى الصفحة الرئيسية
+const mainMusic = document.getElementById('myAudio');
+mainMusic.play().catch(()=>{});
+  document.getElementById('quizMusic').currentTime = 0;  
+  used = []; current = 0; score = 0;  
+}  
+</script>    </body>  
 </html>
