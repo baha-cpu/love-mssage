@@ -6,13 +6,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- شاشة كلمة السر -->
+  <div id="passwordOverlay">
+    <div class="password-box">
+      <h2>🎀 سري بيني و بينك 🎀</h2>
+      <p>تلميح: Heja t3jbni fik 💌</p>
+      <input type="password" id="passwordInput" placeholder="أدخل كلمة السر">
+      <button id="submitPassword">دخول 💌</button>
+      <p id="passwordError">❌ كلمة السر غالطة</p>
+    </div>
+  </div>
+
   <!-- قلوب متحركة -->
   <script src="script.js" defer></script>
 
   <!-- زر تشغيل الموسيقى -->
-  <button id="musicBtn">
-    Music🎶
-  </button>
+  <button id="musicBtn">Music🎶</button>
   <audio id="myAudio" loop>
     <source src="love.mp3" type="audio/mpeg" />
   </audio>
@@ -47,11 +57,9 @@
       <source src="romantic.mp3" type="audio/mpeg" />
     </audio>
   </div>
-
-  <!-- زر تفعيل اللعبة -->
   <button id="startGameBtn">magic game for u ♥</button>
 
-  <!-- لعبة \"تعرفني؟\" التفاعلية -->
+  <!-- لعبة تعرفني؟ -->
   <div id="quizOverlay">
     <button id="closeQuizBtn">×</button>
     <div id="heartGrid"></div>
@@ -68,5 +76,6 @@
     </audio>
   </div>
   <button id="startQuizBtn">ابدأ لعبة تعرفني؟ 💘</button>
+
 </body>
 </html>
