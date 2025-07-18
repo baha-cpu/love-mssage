@@ -19,7 +19,6 @@ body {
   flex-direction: column;
 }
 
-/* الرسالة */
 .container {
   background: rgba(255, 255, 255, 0.85);
   padding: 30px;
@@ -61,7 +60,6 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* الرسالة السرية */
 #secretMessage {
   display: none;
   font-size: 1.2em;
@@ -71,7 +69,6 @@ button:hover {
   animation: fadeIn 1s ease;
 }
 
-/* القلوب المتحركة */
 .heart {
   position: absolute;
   font-size: 24px;
@@ -81,17 +78,10 @@ button:hover {
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(100vh) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100px) scale(1.5);
-    opacity: 0;
-  }
+  0% { transform: translateY(100vh) scale(1); opacity: 1; }
+  100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
 }
 
-/* لعبة الخاتم */
 #loveGame {
   display: none;
   position: fixed;
@@ -150,7 +140,6 @@ button:hover {
   100% { transform: scale(1); }
 }
 
-/* زر تشغيل الألعاب */
 #startGameBtn, #startQuizBtn {
   position: fixed;
   padding: 10px 20px;
@@ -181,7 +170,6 @@ button:hover {
   50% { transform: scale(1.1); }
 }
 
-/* لعبة تعرفني؟ */
 #quizOverlay {
   display: none;
   position: fixed;
@@ -252,4 +240,68 @@ button:hover {
   color: white;
   font-size: 2.5em;
   font-weight: bold;
+}
+
+/* كلمة السر */
+#passwordOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 100000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+}
+
+.password-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 90%;
+  box-shadow: 0 0 30px pink;
+  animation: fadeIn 1s ease;
+}
+
+.password-box h2 {
+  color: #cc0066;
+  margin-bottom: 15px;
+}
+
+.password-box p {
+  color: #333;
+  margin: 10px 0;
+}
+
+#passwordInput {
+  padding: 10px;
+  font-size: 1.1em;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+#submitPassword {
+  background-color: #ff3399;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#submitPassword:hover {
+  background-color: #cc0066;
+}
+
+#passwordError {
+  color: red;
+  display: none;
+  margin-top: 10px;
 }
