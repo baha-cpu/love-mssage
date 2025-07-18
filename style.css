@@ -243,18 +243,21 @@ button:hover {
 }
 
 /* كلمة السر */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ffe6f0;
+  overflow: hidden;
+}
+
 #passwordOverlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.95);
-  z-index: 100000;
+  inset: 0;
+  background: #000000aa;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Cairo', sans-serif;
-  direction: rtl;
+  z-index: 9999;
 }
 
 .password-box {
@@ -262,46 +265,30 @@ button:hover {
   padding: 30px;
   border-radius: 20px;
   text-align: center;
-  max-width: 90%;
-  box-shadow: 0 0 30px pink;
-  animation: fadeIn 1s ease;
+  box-shadow: 0 0 10px #00000088;
 }
 
-.password-box h2 {
-  color: #cc0066;
-  margin-bottom: 15px;
-}
-
-.password-box p {
-  color: #333;
-  margin: 10px 0;
-}
-
-#passwordInput {
+.password-box input {
   padding: 10px;
-  font-size: 1.1em;
-  border-radius: 10px;
+  font-size: 16px;
+  width: 200px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   margin-bottom: 10px;
-  width: 80%;
 }
 
-#submitPassword {
-  background-color: #ff3399;
+.password-box button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff4da6;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s ease;
-}
-
-#submitPassword:hover {
-  background-color: #cc0066;
 }
 
 #passwordError {
   color: red;
-  display: none;
   margin-top: 10px;
+  display: none;
 }
