@@ -8,11 +8,9 @@ const validPasswords = [
   "chfyfy"
 ];
 
-// ✅ منع التمرير في البداية
 document.body.style.overflow = 'hidden';
 
-// ✅ تأكيد جاهزية العناصر
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
   const passwordOverlay = document.getElementById("passwordOverlay");
   const passwordInput = document.getElementById("passwordInput");
   const submitPassword = document.getElementById("submitPassword");
@@ -23,13 +21,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (validPasswords.includes(value)) {
       passwordOverlay.style.display = "none";
-      document.body.style.overflow = ''; // تفعيل التمرير
+      document.body.style.overflow = '';
+      document.body.style.zoom = "100%"; // يرجع الزوم للوضع العادي
     } else {
       passwordError.style.display = "block";
     }
   };
 });
-
 // ❤️ توليد القلوب المتحركة
 for (let i = 0; i < 20; i++) {
   let heart = document.createElement("div");
