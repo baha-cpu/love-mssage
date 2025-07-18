@@ -1,306 +1,218 @@
-@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap");    {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+// ✅ كلمات السر المسموح بها
+const validPasswords = [
+  "chfeyfi",
+  "chfyfi",
+  "chfeyfy",
+  "chefty",
+  "chfeifi",
+  "chfyfy"
+];
+
+// ✅ منع التمرير في البداية
+document.body.style.overflow = 'hidden';
+
+// ✅ تأكيد جاهزية العناصر عند تحميل الصفحة
+document.addEventListener("DOMContentLoaded", () => {
+  const passwordOverlay = document.getElementById("passwordOverlay");
+  const passwordInput = document.getElementById("passwordInput");
+  const submitPassword = document.getElementById("submitPassword");
+  const passwordError = document.getElementById("passwordError");
+
+  submitPassword.onclick = function () {
+    const value = passwordInput.value.trim().toLowerCase();
+    if (validPasswords.includes(value)) {
+      passwordOverlay.style.display = "none";
+      document.body.style.overflow = ''; // تفعيل التمرير
+    } else {
+      passwordError.style.display = "block";
+    }
+  };
+});
+
+// ❤️ توليد القلوب المتحركة
+for (let i = 0; i < 20; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 3 + Math.random() * 4 + "s";
+  document.body.appendChild(heart);
 }
 
-body {
-font-family: "Cairo", sans-serif;
-height: 100vh;
-background: url("background.jpg") no-repeat center center fixed;
-background-size: cover;
-position: relative;
-overflow: hidden;
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+// 🎵 زر تشغيل/إيقاف الموسيقى
+const musicBtn = document.getElementById('musicBtn');
+const mainAudio = document.getElementById('myAudio');
+
+musicBtn.onclick = () => {
+  if (mainAudio.paused) {
+    mainAudio.play();
+    musicBtn.innerText = "🔊 إيقاف الموسيقى";
+  } else {
+    mainAudio.pause();
+    musicBtn.innerText = "🎵 تشغيل الموسيقى";
+  }
+};
+
+// 🎁 عرض الرسالة السرية
+document.getElementById('secretBtn').onclick = () => {
+  document.getElementById('secretMessage').style.display = 'block';
+};
+
+// 💍 اللعبة السحرية (الخاتم)
+document.getElementById('startGameBtn').onclick = () => {
+  document.getElementById("loveGame").style.display = "flex";
+  mainAudio.pause();
+  const loveMusic = document.getElementById("loveMusic");
+  if (loveMusic.paused) {
+    loveMusic.play().catch(() => {});
+  }
+};
+
+document.getElementById('closeGameBtn').onclick = () => {
+  document.getElementById("loveGame").style.display = "none";
+  const loveMusic = document.getElementById("loveMusic");
+  loveMusic.pause();
+  loveMusic.currentTime = 0;
+  const response = document.getElementById("loveResponse");
+  response.style.display = "none";
+  response.querySelector(".ring-emoji").classList.remove("grow-ring");
+};
+
+document.querySelectorAll('.loveAnswerBtn').forEach(btn => {
+  btn.onclick = () => {
+    const response = document.getElementById("loveResponse");
+    response.style.display = "block";
+    const ring = response.querySelector(".ring-emoji");
+    ring.classList.add("grow-ring");
+  };
+});
+
+// 🎮 لعبة "تعرفني؟"
+const questions = [
+  "Akther equipe nhebha?⚽",
+  "Akthr équipe nhebha fi touns?⚽🇹🇳",
+  "Akthr karhba nhbhaa?🚗",
+  "Akthr joueur nhbou🐐",
+  "Chnya section eli na9ra fiha🧠",
+  "Chnya akthr matière nhbha📚",
+  "Chnya nhb nwli fi lmosta9l👷",
+  "Chnya no9tet dho3fi🫣",
+  "Kelma dima nawedha🔁",
+  "Akthr loun nhbu❓",
+  "Win nhb n3ich 🇦🇬",
+  "Akthr heja t8achechni🤬",
+  "Nhb nes taarfni ka chnw💭",
+  "Akthr rapeur nhbu🎤",
+  "Akthr 8neya nhbha🎧",
+  "nhb lhayawent?w chnya akthr hayawen nhbu🐕",
+  "Chnya lheja eli tkrzni ki t9ulha?🖕🏿",
+  "Heja modmen aaliha w nhb na7iha🍾",
+  "Heja t3jbni fik👀",
+  "Akthr sport nhbu 🏃🏻‍♂️"
+];
+
+let used = [], current = 0, score = 0, wasMusicPlaying = false;
+
+const quizOverlay = document.getElementById('quizOverlay');
+const questionText = document.getElementById('questionText');
+const questionBox = document.getElementById('questionBox');
+const resultBox = document.getElementById('resultBox');
+const resultText = document.getElementById('resultText');
+const quizMusic = document.getElementById('quizMusic');
+
+const correctSound = new Audio("correct.mp3");
+const wrongSound = new Audio("wrong.mp3");
+
+// بدء لعبة "تعرفني؟"
+document.getElementById('startQuizBtn').onclick = () => {
+  wasMusicPlaying = !mainAudio.paused;
+  quizOverlay.style.display = 'flex';
+  generateHearts();
+  if (!mainAudio.paused) mainAudio.pause();
+};
+
+function generateHearts() {
+  const grid = document.getElementById('heartGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < questions.length; i++) {
+    const btn = document.createElement('div');
+    btn.className = 'heart-btn';
+    btn.innerText = '💌';
+    btn.onclick = () => showQuestion(i, btn);
+    grid.appendChild(btn);
+  }
 }
 
-.container {
-background: rgba(255, 255, 255, 0.85);
-padding: 30px;
-border-radius: 20px;
-text-align: center;
-box-shadow: 0 0 25px rgba(255, 0, 102, 0.4);
-max-width: 90%;
-margin-bottom: 20px;
-animation: fadeIn 1s ease;
+function showQuestion(i, btn) {
+  if (used.includes(i)) return;
+  used.push(i);
+  current++;
+  btn.innerText = '📧';
+  btn.style.pointerEvents = 'none';
+  btn.style.opacity = 0.6;
+
+  questionText.innerText = `${questions[i]}\n✅ ${score}/${questions.length}`;
+  questionBox.style.display = 'block';
+
+  if (quizMusic.paused) quizMusic.play().catch(() => {});
 }
 
-h1 {
-font-size: 2.5em;
-color: #cc0066;
-margin-bottom: 20px;
+document.querySelectorAll('.answerBtn').forEach(btn => {
+  btn.onclick = () => {
+    const knows = btn.getAttribute('data-answer') === 'true';
+    questionBox.style.display = 'none';
+    if (knows) {
+      score++;
+      correctSound.play();
+    } else {
+      wrongSound.play();
+    }
+    if (current === questions.length) showResult();
+  };
+});
+
+function showResult() {
+  const p = Math.round((score / questions.length) * 100);
+  let msg = '', color = '';
+  if (p < 50) {
+    msg = 'bh 🖕🏿🖕🏿🖕🏿';
+    color = '#ff4444';
+  } else if (p <= 75) {
+    msg = 'bh 👍👍👍';
+    color = '#ffc107';
+  } else {
+    msg = 'nhbk 💋';
+    color = '#28a745';
+  }
+
+  resultText.innerText = `نتيجتك: ${p}% → ${msg}`;
+  resultText.style.color = color;
+  resultText.style.fontSize = '2.5em';
+  resultText.style.fontWeight = 'bold';
+  resultBox.style.display = 'block';
+
+  resultBox.querySelectorAll("button").forEach(el => el.remove());
+  const retryBtn = document.createElement("button");
+  retryBtn.innerText = "🔁 أعد المحاولة";
+  retryBtn.onclick = resetGame;
+  retryBtn.style.marginTop = "20px";
+  resultBox.appendChild(retryBtn);
 }
 
-p {
-font-size: 1.3em;
-color: #333;
-margin-bottom: 20px;
+function resetGame() {
+  used = [];
+  current = 0;
+  score = 0;
+  resultBox.style.display = 'none';
+  questionBox.style.display = 'none';
+  quizOverlay.style.display = 'none';
+  resultText.innerText = '';
+  quizMusic.pause();
+  quizMusic.currentTime = 0;
+
+  if (wasMusicPlaying) {
+    mainAudio.play().catch(() => {});
+  }
 }
 
-button {
-background-color: #ff3366;
-border: none;
-padding: 10px 25px;
-border-radius: 25px;
-font-size: 1em;
-color: white;
-cursor: pointer;
-transition: 0.3s ease;
-margin-top: 10px;
-box-shadow: 0 0 10px #ff99cc;
-}
-
-button:hover {
-background-color: #e6004c;
-transform: scale(1.05);
-}
-
-#secretMessage {
-display: none;
-font-size: 1.2em;
-margin-top: 20px;
-color: #cc0033;
-font-weight: bold;
-animation: fadeIn 1s ease;
-}
-
-.heart {
-position: absolute;
-font-size: 24px;
-color: red;
-animation: float 5s infinite ease-in-out;
-opacity: 1;
-}
-
-@keyframes float {
-0% { transform: translateY(100vh) scale(1); opacity: 1; }
-100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
-}
-
-#loveGame {
-display: none;
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: rgba(255, 255, 255, 0.97);
-z-index: 9999;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-font-family: 'Cairo', sans-serif;
-animation: fadeIn 1s ease;
-text-align: center;
-}
-
-#loveGame h2 {
-color: #cc0066;
-font-size: 2.5em;
-margin-bottom: 20px;
-animation: pop 1s ease;
-}
-
-#loveGame p {
-font-size: 1.5em;
-margin-bottom: 30px;
-color: #333;
-animation: fadeIn 2s ease;
-}
-
-#loveGame #loveResponse {
-margin-top: 40px;
-font-size: 1.4em;
-color: #cc0033;
-display: none;
-animation: fadeIn 3s ease;
-}
-
-.ring-emoji.grow-ring {
-display: inline-block;
-animation: ringGrow 2s ease-in-out infinite;
-}
-
-@keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
-}
-
-@keyframes pop {
-0% { transform: scale(0.8); opacity: 0; }
-100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes ringGrow {
-0% { transform: scale(1); }
-50% { transform: scale(2.5); }
-100% { transform: scale(1); }
-}
-
-#startGameBtn, #startQuizBtn {
-position: fixed;
-padding: 10px 20px;
-background: #ff3399;
-color: white;
-border: none;
-border-radius: 30px;
-font-size: 1em;
-cursor: pointer;
-box-shadow: 0 0 10px #ff99cc;
-z-index: 9999;
-transition: 0.3s ease;
-}
-
-#startGameBtn {
-bottom: 20px;
-left: 20px;
-}
-
-#startQuizBtn {
-top: 20px;
-left: 20px;
-animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-0%, 100% { transform: scale(1); }
-50% { transform: scale(1.1); }
-}
-
-#quizOverlay {
-display: none;
-position: fixed;
-top: 0; left: 0;
-width: 100%; height: 100%;
-background: rgba(0, 0, 0, 0.9);
-z-index: 10000;
-justify-content: flex-start;
-align-items: center;
-flex-direction: column;
-color: white;
-padding: 20px;
-font-family: 'Cairo', sans-serif;
-}
-
-#heartGrid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-gap: 20px;
-max-width: 600px;
-margin-top: 30px;
-}
-
-.heart-btn {
-font-size: 3.5em;
-cursor: pointer;
-transition: transform 0.3s ease;
-text-align: center;
-}
-
-.heart-btn:hover {
-transform: scale(1.2);
-}
-
-#questionBox, #resultBox {
-text-align: center;
-max-width: 90%;
-margin-top: 40px;
-}
-
-#questionText {
-font-size: 2em;
-margin-bottom: 30px;
-color: white;
-transition: color 0.3s ease;
-}
-
-.answerBtn {
-padding: 15px 30px;
-margin: 0 10px;
-font-size: 1.2em;
-border-radius: 15px;
-border: none;
-cursor: pointer;
-}
-
-.answerBtn[data-answer="true"] {
-background: #28a745;
-color: white;
-}
-
-.answerBtn[data-answer="false"] {
-background: #dc3545;
-color: white;
-}
-
-#resultText {
-color: white;
-font-size: 2.5em;
-font-weight: bold;
-}
-
-/* كلمة السر */
-#passwordOverlay {
-position: fixed;
-top: 0; left: 0;
-width: 100vw;
-height: 100vh;
-background: rgba(0, 0, 0, 0.95);
-z-index: 100000;
-display: flex;
-justify-content: center;
-align-items: center;
-font-family: 'Cairo', sans-serif;
-direction: rtl;
-}
-
-.password-box {
-background: white;
-padding: 30px;
-border-radius: 20px;
-text-align: center;
-max-width: 90%;
-box-shadow: 0 0 30px pink;
-animation: fadeIn 1s ease;
-}
-
-.password-box h2 {
-color: #cc0066;
-margin-bottom: 15px;
-}
-
-.password-box p {
-color: #333;
-margin: 10px 0;
-}
-
-#passwordInput {
-padding: 10px;
-font-size: 1.1em;
-border-radius: 10px;
-border: 1px solid #ccc;
-margin-bottom: 10px;
-width: 80%;
-}
-
-#submitPassword {
-background-color: #ff3399;
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 20px;
-cursor: pointer;
-transition: 0.3s ease;
-}
-
-#submitPassword:hover {
-background-color: #cc0066;
-}
-
-#passwordError {
-color: red;
-display: none;
-margin-top: 10px;
-}
-
+document.getElementById('closeQuizBtn').onclick = resetGame;
