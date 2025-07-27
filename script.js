@@ -265,24 +265,27 @@ const worlds = [
   content: `
     <h2>🧩 عالم الذكرى الجميلة 🧩</h2>
     <p>اسحبي القطع لتجميع الصورة الرومانسية.</p>
-    <canvas id="puzzleCanvas" width="720" height="907" style="touch-action:none; background:#eee; border-radius:18px;"></canvas>
+    <div style="overflow:auto; display:flex; justify-content:center;">
+      <canvas id="puzzleCanvas" width="720" height="907" style="touch-action:none; background:#eee; border-radius:18px; max-width:98vw; max-height:72vh;"></canvas>
+    </div>
     <div class="loveTapHint">اسحبي القطع بأصبعك!</div>
-    <button id="nextWorldBtn" style="display:none;">التالي</button>
   `,
   onEnter: function() {
-    const imgSrc = "puzzle.jpg"; // تأكد من وجود الصورة بهذا الاسم
+    const imgSrc = "puzzle.jpg"; // يجب وضع الصورة بهذا الاسم في مجلد الموقع
     const canvas = document.getElementById("puzzleCanvas");
     const ctx = canvas.getContext("2d");
     const img = new Image();
     img.src = imgSrc;
 
-    const pw = 360, ph = 454; // نصف عرض وارتفاع الصورة الأصلية 720x907
+    // أبعاد القطعة (4 قطع: 2x2)
+    const pw = 360, ph = 453.5;
 
-    const pieces = [
-      { x: 0,   y: 0,    ox: 50,  oy: 50 },           // أعلى يسار
-      { x: pw, y: 0,    ox: 420, oy: 60 },           // أعلى يمين
-      { x: 0,   y: ph,  ox: 60,  oy: ph + 100 },     // أسفل يسار
-      { x: pw, y: ph,  ox: 430, oy: ph + 100 }       // أسفل يمين
+    // مواضع القطع (ox, oy = مكان البداية للقطعة)
+    let pieces = [
+      { x: 0,    y: 0,    ox: 40,   oy: 80 },           // أعلى يسار
+      { x: pw,   y: 0,    ox: 380,  oy: 35 },           // أعلى يمين
+      { x: 0,    y: ph,   ox: 70,   oy: 490 },          // أسفل يسار
+      { x: pw,   y: ph,   ox: 410,  oy: 570 }           // أسفل يمين
     ];
 
     let dragging = -1, offsetX = 0, offsetY = 0;
@@ -295,7 +298,7 @@ const worlds = [
         const p = pieces[i];
         ctx.drawImage(img, p.x, p.y, pw, ph, p.ox, p.oy, pw, ph);
         ctx.strokeStyle = "#ff3399";
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 4;
         ctx.strokeRect(p.ox, p.oy, pw, ph);
       }
     }
@@ -309,6 +312,9 @@ const worlds = [
       }
       return -1;
     }
+
+    // لمنع تمرير الصفحة باللمس على الكانفاس
+    canvas.addEventListener("touchmove", function(e) { e.preventDefault(); }, { passive: false });
 
     canvas.ontouchstart = function(e) {
       const r = canvas.getBoundingClientRect();
@@ -335,17 +341,16 @@ const worlds = [
     canvas.ontouchend = function() {
       if (dragging === -1) return;
       const p = pieces[dragging];
-      if (Math.abs(p.ox - p.x) < 20 && Math.abs(p.oy - p.y) < 20) {
+      if (Math.abs(p.ox - p.x) < 25 && Math.abs(p.oy - p.y) < 25) {
         p.ox = p.x;
         p.oy = p.y;
       }
       dragging = -1;
       draw();
 
-      const ok = pieces.every(p => p.ox === p.x && p.oy === p.y);
+      const ok = pieces.every((p, i) => p.ox === p.x && p.oy === p.y);
       if (ok) {
-        const btn = document.getElementById("nextWorldBtn");
-        if (btn) btn.style.display = "block";
+        setTimeout(()=>nextWorldBtn.style.display='block',900);
       }
     };
   }
