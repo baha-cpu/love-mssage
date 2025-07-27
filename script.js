@@ -259,83 +259,87 @@ const worlds = [
     }
   },
 
-  // 2. عالم تركيب الصورة
-  {
-    name: "عالم الذكرى الجميلة",
-    bg: "linear-gradient(120deg,#43cea2 40%,#185a9d 100%)",
-    content: `
-      <h2>🧩 عالم الذكرى الجميلة 🧩</h2>
-      <p>اسحبي القطع لتجميع الصورة الرومانسية.</p>
-      <canvas id="puzzleCanvas" width="280" height="160" style="touch-action:none;"></canvas>
-      <div class="loveTapHint">اسحبي القطع بأصبعك!</div>
-    `,
-    onEnter: function() {
-      // Puzzle Image
-      const imgSrc = "puzzle.jpg"; // عدل لاسم صورة الذكرى
-      const canvas = document.getElementById("puzzleCanvas");
-      const ctx = canvas.getContext("2d");
-      let img = new Image();
-      img.src = imgSrc;
-      const pw = 140, ph = 80;
-      let pieces = [
-        {x:0,y:0,ox:10,oy:10},    //القطعة الأولى
-        {x:pw,y:0,ox:120,oy:20},  //الثانية
-        {x:0,y:ph,ox:20,oy:100},  //الثالثة
-        {x:pw,y:ph,ox:110,oy:110} //الرابعة
-      ];
-      let dragging = -1, offsetX=0, offsetY=0;
-      img.onload = draw;
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        for(let i=0;i<4;i++){
-          let p = pieces[i];
-          ctx.drawImage(img, p.x, p.y, pw, ph, p.ox, p.oy, pw, ph);
-          ctx.strokeRect(p.ox, p.oy, pw, ph);
-        }
+  // 2. عالم تركيب الصورة (معدل)
+{
+  name: "عالم الذكرى الجميلة",
+  bg: "linear-gradient(120deg,#43cea2 40%,#185a9d 100%)",
+  content: `
+    <h2>🧩 عالم الذكرى الجميلة 🧩</h2>
+    <p>اسحبي القطع لتجميع الصورة الرومانسية.</p>
+    <canvas id="puzzleCanvas" width="360" height="450" style="touch-action:none; background:#eee; border-radius:18px;"></canvas>
+    <div class="loveTapHint">اسحبي القطع بأصبعك!</div>
+  `,
+  onEnter: function() {
+    // Puzzle Image
+    const imgSrc = "puzzle.jpg"; // اسم صورتك
+    const canvas = document.getElementById("puzzleCanvas");
+    const ctx = canvas.getContext("2d");
+    let img = new Image();
+    img.src = imgSrc;
+
+    // أبعاد كل قطعة (نقسم الصورة 2x2)
+    const pw = 180, ph = 225;
+    let pieces = [
+      {x:0, y:0, ox:20, oy:20},           // أعلى يسار
+      {x:pw, y:0, ox:180+30, oy:22},      // أعلى يمين
+      {x:0, y:ph, ox:24, oy:225+28},      // أسفل يسار
+      {x:pw, y:ph, ox:190, oy:235}        // أسفل يمين
+    ];
+    let dragging = -1, offsetX=0, offsetY=0;
+    img.onload = draw;
+    function draw() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let i=0;i<4;i++){
+        let p = pieces[i];
+        ctx.drawImage(img, p.x, p.y, pw, ph, p.ox, p.oy, pw, ph);
+        ctx.strokeStyle = "#ff3399";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(p.ox, p.oy, pw, ph);
       }
-      function getPieceAt(x,y){
-        for(let i=3;i>=0;i--){
-          let p = pieces[i];
-          if(x>p.ox&&x<p.ox+pw&&y>p.oy&&y<p.oy+ph) return i;
-        }
-        return -1;
-      }
-      canvas.ontouchstart = function(e){
-        let r = canvas.getBoundingClientRect();
-        let x = e.touches[0].clientX - r.left;
-        let y = e.touches[0].clientY - r.top;
-        let idx = getPieceAt(x,y);
-        if(idx>-1){
-          dragging = idx;
-          offsetX = x-pieces[idx].ox;
-          offsetY = y-pieces[idx].oy;
-        }
-      };
-      canvas.ontouchmove = function(e){
-        if(dragging==-1) return;
-        let r = canvas.getBoundingClientRect();
-        let x = e.touches[0].clientX - r.left;
-        let y = e.touches[0].clientY - r.top;
-        pieces[dragging].ox = x-offsetX;
-        pieces[dragging].oy = y-offsetY;
-        draw();
-      };
-      canvas.ontouchend = function(){
-        if(dragging==-1) return;
-        // سناب (snap) القطع إذا اقتربت من مكانها الصحيح
-        let p = pieces[dragging];
-        if(Math.abs(p.ox-p.x)<18 && Math.abs(p.oy-p.y)<18){
-          p.ox = p.x; p.oy = p.y;
-        }
-        dragging=-1; draw();
-        // إذا كل القطع في مكانها الصحيح
-        let ok = pieces.every(p=>p.ox===p.x&&p.oy===p.y);
-        if(ok){
-          setTimeout(()=>nextWorldBtn.style.display='block',900);
-        }
-      };
     }
-  },
+    function getPieceAt(x,y){
+      for(let i=3;i>=0;i--){
+        let p = pieces[i];
+        if(x>p.ox&&x<p.ox+pw&&y>p.oy&&y<p.oy+ph) return i;
+      }
+      return -1;
+    }
+    canvas.ontouchstart = function(e){
+      let r = canvas.getBoundingClientRect();
+      let x = e.touches[0].clientX - r.left;
+      let y = e.touches[0].clientY - r.top;
+      let idx = getPieceAt(x,y);
+      if(idx>-1){
+        dragging = idx;
+        offsetX = x-pieces[idx].ox;
+        offsetY = y-pieces[idx].oy;
+      }
+    };
+    canvas.ontouchmove = function(e){
+      if(dragging==-1) return;
+      let r = canvas.getBoundingClientRect();
+      let x = e.touches[0].clientX - r.left;
+      let y = e.touches[0].clientY - r.top;
+      pieces[dragging].ox = x-offsetX;
+      pieces[dragging].oy = y-offsetY;
+      draw();
+    };
+    canvas.ontouchend = function(){
+      if(dragging==-1) return;
+      // snap القطعة إذا اقتربت من مكانها الصح
+      let p = pieces[dragging];
+      if(Math.abs(p.ox-p.x)<20 && Math.abs(p.oy-p.y)<20){
+        p.ox = p.x; p.oy = p.y;
+      }
+      dragging=-1; draw();
+      // إذا كل القطع في مكانها الصحيح
+      let ok = pieces.every(p=>p.ox===p.x&&p.oy===p.y);
+      if(ok){
+        setTimeout(()=>nextWorldBtn.style.display='block',900);
+      }
+    };
+  }
+},
 
   // 3. شاشة النهاية (يمكنك تغيير النص والصورة)
   {
