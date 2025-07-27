@@ -216,3 +216,180 @@ function resetGame() {
 }
 
 document.getElementById('closeQuizBtn').onclick = resetGame;
+// متغيرات اللعبة
+const worlds = [
+  // 1. عالم الإمساك بالقلب الهارب
+  {
+    name: "عالم القلب الهارب",
+    bg: "linear-gradient(120deg,#f5576c 40%,#f093fb 100%)",
+    content: `
+      <h2>🌟 عالم القلب الهارب 🌟</h2>
+      <p>هناك قلب صغير يهرب منك! اضغطي عليه ثلاث مرات للإمساك به.</p>
+      <div id="runawayHeart" style="position:relative; height:180px; margin-top:25px;">
+        <span id="heartSprite" style="font-size:3.5em; position:absolute; left:50px; top:50px; transition:.2s;"></span>
+      </div>
+      <div class="loveTapHint">إلمسي القلب بسرعة!</div>
+      <div id="catchCount" style="margin-top:16px; font-size:1.2em;"></div>
+    `,
+    onEnter: function() {
+      let heart = document.getElementById('heartSprite');
+      let count = 0;
+      heart.innerText = "💗";
+      function moveHeart() {
+        if (!heart) return;
+        let parent = document.getElementById('runawayHeart');
+        let w = parent.offsetWidth-60, h = parent.offsetHeight-60;
+        heart.style.left = (Math.random()*w)+"px";
+        heart.style.top = (Math.random()*h)+"px";
+      }
+      moveHeart();
+      heart.ontouchstart = function(e) {
+        e.preventDefault();
+        count++;
+        document.getElementById('catchCount').innerText = `عدد مرات الإمساك: ${count}/3`;
+        moveHeart();
+        if(count>=3){
+          document.getElementById('catchCount').innerText = "👏 برافو! أمسكتِ القلب!";
+          setTimeout(()=>nextWorldBtn.style.display='block',800);
+        }
+      };
+      // لمزيد من المرح: القلب يتحرك كل ثانية ليهرب!
+      let interval = setInterval(moveHeart, 1100);
+      nextWorldBtn.addEventListener("click", ()=>clearInterval(interval), {once:true});
+    }
+  },
+
+  // 2. عالم تركيب الصورة
+  {
+    name: "عالم الذكرى الجميلة",
+    bg: "linear-gradient(120deg,#43cea2 40%,#185a9d 100%)",
+    content: `
+      <h2>🧩 عالم الذكرى الجميلة 🧩</h2>
+      <p>اسحبي القطع لتجميع الصورة الرومانسية.</p>
+      <canvas id="puzzleCanvas" width="280" height="160" style="touch-action:none;"></canvas>
+      <div class="loveTapHint">اسحبي القطع بأصبعك!</div>
+    `,
+    onEnter: function() {
+      // Puzzle Image
+      const imgSrc = "puzzle.jpg"; // عدل لاسم صورة الذكرى
+      const canvas = document.getElementById("puzzleCanvas");
+      const ctx = canvas.getContext("2d");
+      let img = new Image();
+      img.src = imgSrc;
+      const pw = 140, ph = 80;
+      let pieces = [
+        {x:0,y:0,ox:10,oy:10},    //القطعة الأولى
+        {x:pw,y:0,ox:120,oy:20},  //الثانية
+        {x:0,y:ph,ox:20,oy:100},  //الثالثة
+        {x:pw,y:ph,ox:110,oy:110} //الرابعة
+      ];
+      let dragging = -1, offsetX=0, offsetY=0;
+      img.onload = draw;
+      function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(let i=0;i<4;i++){
+          let p = pieces[i];
+          ctx.drawImage(img, p.x, p.y, pw, ph, p.ox, p.oy, pw, ph);
+          ctx.strokeRect(p.ox, p.oy, pw, ph);
+        }
+      }
+      function getPieceAt(x,y){
+        for(let i=3;i>=0;i--){
+          let p = pieces[i];
+          if(x>p.ox&&x<p.ox+pw&&y>p.oy&&y<p.oy+ph) return i;
+        }
+        return -1;
+      }
+      canvas.ontouchstart = function(e){
+        let r = canvas.getBoundingClientRect();
+        let x = e.touches[0].clientX - r.left;
+        let y = e.touches[0].clientY - r.top;
+        let idx = getPieceAt(x,y);
+        if(idx>-1){
+          dragging = idx;
+          offsetX = x-pieces[idx].ox;
+          offsetY = y-pieces[idx].oy;
+        }
+      };
+      canvas.ontouchmove = function(e){
+        if(dragging==-1) return;
+        let r = canvas.getBoundingClientRect();
+        let x = e.touches[0].clientX - r.left;
+        let y = e.touches[0].clientY - r.top;
+        pieces[dragging].ox = x-offsetX;
+        pieces[dragging].oy = y-offsetY;
+        draw();
+      };
+      canvas.ontouchend = function(){
+        if(dragging==-1) return;
+        // سناب (snap) القطع إذا اقتربت من مكانها الصحيح
+        let p = pieces[dragging];
+        if(Math.abs(p.ox-p.x)<18 && Math.abs(p.oy-p.y)<18){
+          p.ox = p.x; p.oy = p.y;
+        }
+        dragging=-1; draw();
+        // إذا كل القطع في مكانها الصحيح
+        let ok = pieces.every(p=>p.ox===p.x&&p.oy===p.y);
+        if(ok){
+          setTimeout(()=>nextWorldBtn.style.display='block',900);
+        }
+      };
+    }
+  },
+
+  // 3. شاشة النهاية (يمكنك تغيير النص والصورة)
+  {
+    name: "نهاية الرحلة",
+    bg: "linear-gradient(120deg,#f7971e 40%,#ffd200 100%)",
+    content: `
+      <h2>🎉 النهاية 🎉</h2>
+      <p>لقد أنقذتِ قصة حبنا!<br>انظري للمفاجأة:</p>
+      <img src="surprise.jpg" style="max-width:220px; border-radius:16px;">
+      <div style="margin-top:25px; color:#ff3399; font-size:1.3em;">
+        أنتِ حبي الأبدي ♥<br>أحبك بلا نهاية!
+      </div>
+      <div class="loveTapHint">يمكنك الخروج من اللعبة الآن</div>
+    `,
+    onEnter: function() {}
+  }
+];
+
+const startLoveJourneyBtn = document.getElementById("startLoveJourneyBtn");
+const loveJourneyOverlay = document.getElementById("loveJourneyOverlay");
+const loveWorld = document.getElementById("loveWorld");
+const nextWorldBtn = document.getElementById("nextWorldBtn");
+const loveJourneyMusic = document.getElementById("loveJourneyMusic");
+
+let worldIndex = 0;
+
+startLoveJourneyBtn.onclick = function(){
+  loveJourneyOverlay.style.display = "flex";
+  worldIndex = 0;
+  showWorld(worldIndex);
+  loveJourneyMusic.play().catch(()=>{});
+  document.body.style.overflow = "hidden";
+};
+nextWorldBtn.onclick = function(){
+  worldIndex++;
+  if(worldIndex < worlds.length){
+    showWorld(worldIndex);
+  }
+};
+function showWorld(idx){
+  let w = worlds[idx];
+  loveWorld.innerHTML = w.content;
+  loveJourneyOverlay.style.background = w.bg;
+  nextWorldBtn.style.display = "none";
+  setTimeout(()=>w.onEnter&&w.onEnter(),120);
+  // زر العودة عند النهاية
+  if(idx===worlds.length-1){
+    nextWorldBtn.style.display = "none";
+    loveJourneyMusic.pause();
+    setTimeout(()=>loveJourneyOverlay.onclick = ()=>{ 
+      loveJourneyOverlay.style.display = "none"; 
+      document.body.style.overflow = "";
+    }, 800);
+  }else{
+    loveJourneyOverlay.onclick = null;
+  }
+}
