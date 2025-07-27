@@ -496,10 +496,10 @@ const worlds = [
   bg: "linear-gradient(120deg,#f7971e 40%,#ffd200 100%)",
   content: `
     <h2>🎉 النهاية 🎉</h2>
-    <p>لقد أنقذتِ قصة حبنا!<br>انظري للمفاجأة:</p>
+    <p>Kamelnaaaa🙌🏼<br>A3ml ZOOM bch tnjm ta9raa🔎</p>
     <img src="surprise.jpg" style="max-width:220px; border-radius:16px;">
     <div style="margin-top:25px; color:#ff3399; font-size:1.3em;">
-      Nhebk barchaa ♥<br>Zoomi bch ta9raa che3r!
+      Nhebk barchaa ♥<br>w Nmut fikk💋!
     </div>
     <div class="loveTapHint">يمكنك الخروج من اللعبة الآن</div>
   `,
