@@ -316,3 +316,71 @@ button:hover {
   display: none;
   margin-top: 10px;
 }
+#loveJourneyOverlay {
+  display: none;
+  position: fixed;
+  z-index: 20000;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: linear-gradient(120deg, #fdeff9 60%, #a1c4fd 100%);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  animation: fadeIn 1s;
+}
+#loveWorld {
+  width: 90vw; max-width: 430px;
+  min-height: 320px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 0 8px 35px #ff99cc70;
+  padding: 25px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+@media (max-width: 500px) {
+  #loveWorld { min-height: 250px; }
+}
+#loveWorld img, #loveWorld canvas {
+  max-width: 90%;
+  border-radius: 15px;
+  margin: 15px 0;
+}
+#nextWorldBtn {
+  margin-top: 22px;
+  background: #ff3399;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.3em;
+  padding: 12px 28px;
+  box-shadow: 0 0 10px #ff99cc;
+}
+#nextWorldBtn:hover { background: #cc0066; }
+#startLoveJourneyBtn {
+  position: fixed;
+  right: 20px; top: 80px;
+  background: linear-gradient(90deg, #ff3399 60%, #ffc0cb 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2em;
+  padding: 16px 30px;
+  box-shadow: 0 0 15px #ff99cc;
+  z-index: 19999;
+  transition: 0.3s;
+}
+#startLoveJourneyBtn:active { background: #cc0066; }
+.loveTapHint {
+  color: #f50057; font-size: 1.1em; margin-top: 20px;
+  animation: pulse 2s infinite;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
